@@ -22,6 +22,9 @@ Layout/LineLength:
 Layout/HashAlignment:
   Enabled: false
 
+Layout/EndOfLine:
+   Enabled: false  
+
 Style/FrozenStringLiteralComment:
   Enabled: false
 
