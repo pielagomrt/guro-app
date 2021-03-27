@@ -10,10 +10,44 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_25_121201) do
+ActiveRecord::Schema.define(version: 2021_03_26_193529) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "grading_systems", force: :cascade do |t|
+    t.integer "homework"
+    t.integer "seatwork"
+    t.integer "project"
+    t.integer "exam"
+    t.integer "attendance"
+    t.integer "total"
+    t.bigint "teacher_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["teacher_id"], name: "index_grading_systems_on_teacher_id"
+  end
+
+  create_table "sections", force: :cascade do |t|
+    t.string "name"
+    t.integer "active_quarter"
+    t.bigint "teacher_id"
+    t.bigint "grading_system_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["grading_system_id"], name: "index_sections_on_grading_system_id"
+    t.index ["teacher_id"], name: "index_sections_on_teacher_id"
+  end
+
+  create_table "students", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.bigint "section_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["section_id"], name: "index_students_on_section_id"
+  end
 
   create_table "teachers", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -23,11 +57,15 @@ ActiveRecord::Schema.define(version: 2021_03_25_121201) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "last_name"
     t.string "first_name"
+    t.string "last_name"
     t.string "subject"
     t.index ["email"], name: "index_teachers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_teachers_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "grading_systems", "teachers"
+  add_foreign_key "sections", "grading_systems"
+  add_foreign_key "sections", "teachers"
+  add_foreign_key "students", "sections"
 end
