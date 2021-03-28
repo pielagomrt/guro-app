@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_28_163336) do
+ActiveRecord::Schema.define(version: 2021_03_28_174541) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,6 +93,45 @@ ActiveRecord::Schema.define(version: 2021_03_28_163336) do
     t.index ["teacher_id"], name: "index_sections_on_teacher_id"
   end
 
+  create_table "student_absents", force: :cascade do |t|
+    t.bigint "student_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["student_id"], name: "index_student_absents_on_student_id"
+  end
+
+  create_table "student_exams", force: :cascade do |t|
+    t.integer "score"
+    t.bigint "student_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["student_id"], name: "index_student_exams_on_student_id"
+  end
+
+  create_table "student_homeworks", force: :cascade do |t|
+    t.integer "score"
+    t.bigint "student_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["student_id"], name: "index_student_homeworks_on_student_id"
+  end
+
+  create_table "student_projects", force: :cascade do |t|
+    t.integer "score"
+    t.bigint "student_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["student_id"], name: "index_student_projects_on_student_id"
+  end
+
+  create_table "student_seatworks", force: :cascade do |t|
+    t.integer "score"
+    t.bigint "student_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["student_id"], name: "index_student_seatworks_on_student_id"
+  end
+
   create_table "students", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -127,5 +166,10 @@ ActiveRecord::Schema.define(version: 2021_03_28_163336) do
   add_foreign_key "quarters", "sections"
   add_foreign_key "sections", "grading_systems"
   add_foreign_key "sections", "teachers"
+  add_foreign_key "student_absents", "students"
+  add_foreign_key "student_exams", "students"
+  add_foreign_key "student_homeworks", "students"
+  add_foreign_key "student_projects", "students"
+  add_foreign_key "student_seatworks", "students"
   add_foreign_key "students", "sections"
 end
