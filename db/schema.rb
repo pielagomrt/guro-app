@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_27_193535) do
+ActiveRecord::Schema.define(version: 2021_03_28_163336) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,50 @@ ActiveRecord::Schema.define(version: 2021_03_27_193535) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["teacher_id"], name: "index_grading_systems_on_teacher_id"
+  end
+
+  create_table "quarter_attendances", force: :cascade do |t|
+    t.date "date"
+    t.bigint "quarter_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["quarter_id"], name: "index_quarter_attendances_on_quarter_id"
+  end
+
+  create_table "quarter_exams", force: :cascade do |t|
+    t.string "title"
+    t.integer "max_score"
+    t.bigint "quarter_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["quarter_id"], name: "index_quarter_exams_on_quarter_id"
+  end
+
+  create_table "quarter_homeworks", force: :cascade do |t|
+    t.string "title"
+    t.integer "max_score"
+    t.bigint "quarter_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["quarter_id"], name: "index_quarter_homeworks_on_quarter_id"
+  end
+
+  create_table "quarter_projects", force: :cascade do |t|
+    t.string "title"
+    t.integer "max_score"
+    t.bigint "quarter_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["quarter_id"], name: "index_quarter_projects_on_quarter_id"
+  end
+
+  create_table "quarter_seatworks", force: :cascade do |t|
+    t.string "title"
+    t.integer "max_score"
+    t.bigint "quarter_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["quarter_id"], name: "index_quarter_seatworks_on_quarter_id"
   end
 
   create_table "quarters", force: :cascade do |t|
@@ -75,6 +119,11 @@ ActiveRecord::Schema.define(version: 2021_03_27_193535) do
   end
 
   add_foreign_key "grading_systems", "teachers"
+  add_foreign_key "quarter_attendances", "quarters"
+  add_foreign_key "quarter_exams", "quarters"
+  add_foreign_key "quarter_homeworks", "quarters"
+  add_foreign_key "quarter_projects", "quarters"
+  add_foreign_key "quarter_seatworks", "quarters"
   add_foreign_key "quarters", "sections"
   add_foreign_key "sections", "grading_systems"
   add_foreign_key "sections", "teachers"
