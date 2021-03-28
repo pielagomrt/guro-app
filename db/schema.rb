@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_26_193529) do
+ActiveRecord::Schema.define(version: 2021_03_27_193535) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,16 @@ ActiveRecord::Schema.define(version: 2021_03_26_193529) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["teacher_id"], name: "index_grading_systems_on_teacher_id"
+  end
+
+  create_table "quarters", force: :cascade do |t|
+    t.integer "sequence"
+    t.string "school_year"
+    t.integer "max_attendance"
+    t.bigint "section_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["section_id"], name: "index_quarters_on_section_id"
   end
 
   create_table "sections", force: :cascade do |t|
@@ -65,6 +75,7 @@ ActiveRecord::Schema.define(version: 2021_03_26_193529) do
   end
 
   add_foreign_key "grading_systems", "teachers"
+  add_foreign_key "quarters", "sections"
   add_foreign_key "sections", "grading_systems"
   add_foreign_key "sections", "teachers"
   add_foreign_key "students", "sections"
