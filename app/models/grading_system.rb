@@ -6,4 +6,6 @@ class GradingSystem < ApplicationRecord
   validates :project, presence: true
   validates :exam, presence: true
   validates :attendance, presence: true
+  belongs_to :teacher
+  has_many :sections, dependent: :nullify
 end

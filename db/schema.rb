@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_28_174541) do
+ActiveRecord::Schema.define(version: 2021_03_29_013305) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,6 +97,10 @@ ActiveRecord::Schema.define(version: 2021_03_28_174541) do
     t.bigint "student_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "quarter_id"
+    t.bigint "quarter_attendance_id"
+    t.index ["quarter_attendance_id"], name: "index_student_absents_on_quarter_attendance_id"
+    t.index ["quarter_id"], name: "index_student_absents_on_quarter_id"
     t.index ["student_id"], name: "index_student_absents_on_student_id"
   end
 
@@ -105,6 +109,10 @@ ActiveRecord::Schema.define(version: 2021_03_28_174541) do
     t.bigint "student_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "quarter_id"
+    t.bigint "quarter_exam_id"
+    t.index ["quarter_exam_id"], name: "index_student_exams_on_quarter_exam_id"
+    t.index ["quarter_id"], name: "index_student_exams_on_quarter_id"
     t.index ["student_id"], name: "index_student_exams_on_student_id"
   end
 
@@ -113,6 +121,10 @@ ActiveRecord::Schema.define(version: 2021_03_28_174541) do
     t.bigint "student_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "quarter_id"
+    t.bigint "quarter_homework_id"
+    t.index ["quarter_homework_id"], name: "index_student_homeworks_on_quarter_homework_id"
+    t.index ["quarter_id"], name: "index_student_homeworks_on_quarter_id"
     t.index ["student_id"], name: "index_student_homeworks_on_student_id"
   end
 
@@ -121,6 +133,10 @@ ActiveRecord::Schema.define(version: 2021_03_28_174541) do
     t.bigint "student_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "quarter_id"
+    t.bigint "quarter_project_id"
+    t.index ["quarter_id"], name: "index_student_projects_on_quarter_id"
+    t.index ["quarter_project_id"], name: "index_student_projects_on_quarter_project_id"
     t.index ["student_id"], name: "index_student_projects_on_student_id"
   end
 
@@ -129,6 +145,10 @@ ActiveRecord::Schema.define(version: 2021_03_28_174541) do
     t.bigint "student_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "quarter_id"
+    t.bigint "quarter_seatwork_id"
+    t.index ["quarter_id"], name: "index_student_seatworks_on_quarter_id"
+    t.index ["quarter_seatwork_id"], name: "index_student_seatworks_on_quarter_seatwork_id"
     t.index ["student_id"], name: "index_student_seatworks_on_student_id"
   end
 
@@ -166,10 +186,20 @@ ActiveRecord::Schema.define(version: 2021_03_28_174541) do
   add_foreign_key "quarters", "sections"
   add_foreign_key "sections", "grading_systems"
   add_foreign_key "sections", "teachers"
+  add_foreign_key "student_absents", "quarter_attendances"
+  add_foreign_key "student_absents", "quarters"
   add_foreign_key "student_absents", "students"
+  add_foreign_key "student_exams", "quarter_exams"
+  add_foreign_key "student_exams", "quarters"
   add_foreign_key "student_exams", "students"
+  add_foreign_key "student_homeworks", "quarter_homeworks"
+  add_foreign_key "student_homeworks", "quarters"
   add_foreign_key "student_homeworks", "students"
+  add_foreign_key "student_projects", "quarter_projects"
+  add_foreign_key "student_projects", "quarters"
   add_foreign_key "student_projects", "students"
+  add_foreign_key "student_seatworks", "quarter_seatworks"
+  add_foreign_key "student_seatworks", "quarters"
   add_foreign_key "student_seatworks", "students"
   add_foreign_key "students", "sections"
 end
