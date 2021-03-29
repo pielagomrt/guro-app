@@ -1,4 +1,4 @@
-class Validators::GradingSystem < ActiveModel::Validator
+class Validators::GradingSystemTotal < ActiveModel::Validator
   def validate(record)
     return unless record.new_record?
 
