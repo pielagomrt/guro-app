@@ -4,5 +4,16 @@ FactoryBot.define do
     association :grading_system
     name { 'SectionName' }
     active_quarter { 1 }
+
+    factory :section_with_students do
+      transient do
+        students_count { 20 }
+      end
+
+      after(:create) do |section, evaluator|
+        create_list(:student, evaluator.students_count, section: section)
+        section.reload
+      end
+    end
   end
 end
