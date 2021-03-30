@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :section do
     association :teacher
     association :grading_system
-    name { 'SectionName' }
+    name { Faker::Ancient.god }
     active_quarter { 1 }
 
     factory :section_with_students do
