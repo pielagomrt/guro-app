@@ -1,7 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe FormController, type: :request do
+  let(:teacher) { create(:teacher_with_sections) }
   let(:section) { create(:section_with_students) }
+
+  before do
+    teacher.confirm
+    sign_in(teacher)
+  end
 
   describe 'GET /new/section form#new_section' do
     it 'returns http success' do

@@ -1,6 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe DashboardController, type: :request do
+  let(:teacher) { create(:teacher) }
+
+  before do
+    teacher.confirm
+    sign_in(teacher)
+  end
+
   describe 'GET / dashboard#root' do
     it 'returns http success' do
       get root_path
