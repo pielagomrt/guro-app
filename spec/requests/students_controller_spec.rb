@@ -58,120 +58,113 @@ RSpec.describe StudentsController, type: :request do
   end
 
   describe 'GET /sections/:id/students students#index' do
+    before { get students_path(section) }
+
     it 'returns http success' do
-      get students_path(section)
       expect(response).to have_http_status(:success)
     end
 
     it 'renders index template' do
-      get students_path(section)
       expect(response).to render_template(:index)
     end
 
     it 'has @students instance variable' do
-      get students_path(section)
       expect(assigns(:students)).to eq(section.students)
     end
   end
 
   describe 'GET /sections/:id/students/:student_id students#show' do
+    before { get student_path(id: section.id, student_id: student.id) }
+
     it 'returns http success' do
-      get student_path(id: section.id, student_id: student.id)
       expect(response).to have_http_status(:success)
     end
 
     it 'renders show template' do
-      get student_path(id: section.id, student_id: student.id)
       expect(response).to render_template(:show)
     end
 
     it 'has @student instance variable' do
-      get student_path(id: section.id, student_id: student.id)
       expect(assigns(:student)).to eq(Student.find_by(id: student.id, section_id: section.id))
     end
   end
 
   describe 'GET /sections/:id/students/:student_id/seatworks students#view_seatworks' do
+    before { get view_student_seatworks_path(id: section.id, student_id: student.id) }
+
     it 'returns http success' do
-      get view_student_seatworks_path(id: section.id, student_id: student.id)
       expect(response).to have_http_status(:success)
     end
 
     it 'renders view_seatworks template' do
-      get view_student_seatworks_path(id: section.id, student_id: student.id)
       expect(response).to render_template(:view_seatworks)
     end
 
     it 'has @student_seatworks instance variable' do
-      get view_student_seatworks_path(id: section.id, student_id: student.id)
       expect(assigns(:student_seatworks)).to eq(student.seatworks.where(quarter_id: current_quarter.id))
     end
   end
 
   describe 'GET /sections/:id/students/:student_id/homeworks students#view_homeworks' do
+    before { get view_student_homeworks_path(id: section.id, student_id: student.id) }
+
     it 'returns http success' do
-      get view_student_homeworks_path(id: section.id, student_id: student.id)
       expect(response).to have_http_status(:success)
     end
 
     it 'renders view_homeworks template' do
-      get view_student_homeworks_path(id: section.id, student_id: student.id)
       expect(response).to render_template(:view_homeworks)
     end
 
     it 'has @student_homeworks instance variable' do
-      get view_student_homeworks_path(id: section.id, student_id: student.id)
       expect(assigns(:student_homeworks)).to eq(student.homeworks.where(quarter_id: current_quarter.id))
     end
   end
 
   describe 'GET /sections/:id/students/:student_id/projects students#view_projects' do
+    before { get view_student_projects_path(id: section.id, student_id: student.id) }
+
     it 'returns http success' do
-      get view_student_projects_path(id: section.id, student_id: student.id)
       expect(response).to have_http_status(:success)
     end
 
     it 'renders view_projects template' do
-      get view_student_projects_path(id: section.id, student_id: student.id)
       expect(response).to render_template(:view_projects)
     end
 
     it 'has @student_projects instance variable' do
-      get view_student_projects_path(id: section.id, student_id: student.id)
       expect(assigns(:student_projects)).to eq(student.projects.where(quarter_id: current_quarter.id))
     end
   end
 
   describe 'GET /sections/:id/students/:student_id/exams students#view_exams' do
+    before { get view_student_exams_path(id: section.id, student_id: student.id) }
+
     it 'returns http success' do
-      get view_student_exams_path(id: section.id, student_id: student.id)
       expect(response).to have_http_status(:success)
     end
 
     it 'renders view_exams template' do
-      get view_student_exams_path(id: section.id, student_id: student.id)
       expect(response).to render_template(:view_exams)
     end
 
     it 'has @student_exams instance variable' do
-      get view_student_exams_path(id: section.id, student_id: student.id)
       expect(assigns(:student_exams)).to eq(student.exams.where(quarter_id: current_quarter.id))
     end
   end
 
   describe 'GET /sections/:id/students/:student_id/attendance students#view_absences' do
+    before { get view_student_absences_path(id: section.id, student_id: student.id) }
+
     it 'returns http success' do
-      get view_student_absences_path(id: section.id, student_id: student.id)
       expect(response).to have_http_status(:success)
     end
 
     it 'renders view_absences template' do
-      get view_student_absences_path(id: section.id, student_id: student.id)
       expect(response).to render_template(:view_absences)
     end
 
     it 'has @student_absents instance variable' do
-      get view_student_absences_path(id: section.id, student_id: student.id)
       expect(assigns(:student_absents)).to eq(student.absents.where(quarter_id: current_quarter.id))
     end
   end
