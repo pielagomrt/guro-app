@@ -31,9 +31,17 @@ RSpec.describe SectionProcessesController, type: :request do
       section.reload
     end
 
-    it 'returns http success' do expect(response).to have_http_status(:success) end
-    it 'updates the section name' do expect(section.name).to eq(updates[:name]) end
-    it 'updates the section active quarter' do expect(section.active_quarter).to eq(updates[:active_quarter]) end
+    it 'returns http success' do
+      expect(response).to have_http_status(:success)
+    end
+
+    it 'updates the section name' do
+      expect(section.name).to eq(updates[:name])
+    end
+
+    it 'updates the section active quarter' do
+      expect(section.active_quarter).to eq(updates[:active_quarter])
+    end
   end
 
   describe 'PUT /sections/:id/seatworks/:seatwork_id sections#update_section_seatwork' do
@@ -45,9 +53,17 @@ RSpec.describe SectionProcessesController, type: :request do
       seatwork.reload
     end
 
-    it 'returns http success' do expect(response).to have_http_status(:success) end
-    it 'updates the seatwork title' do expect(seatwork.title).to eq(updates[:title]) end
-    it 'updates the seatwork max_score' do expect(seatwork.max_score).to eq(updates[:max_score]) end
+    it 'returns http success' do
+      expect(response).to have_http_status(:success)
+    end
+
+    it 'updates the seatwork title' do
+      expect(seatwork.title).to eq(updates[:title])
+    end
+
+    it 'updates the seatwork max_score' do
+      expect(seatwork.max_score).to eq(updates[:max_score])
+    end
   end
 
   describe 'PUT /sections/:id/homeworks/:homework_id sections#update_section_homework' do
@@ -59,9 +75,17 @@ RSpec.describe SectionProcessesController, type: :request do
       homework.reload
     end
 
-    it 'returns http success' do expect(response).to have_http_status(:success) end
-    it 'updates the homework title' do expect(homework.title).to eq(updates[:title]) end
-    it 'updates the homework max_score' do expect(homework.max_score).to eq(updates[:max_score]) end
+    it 'returns http success' do
+      expect(response).to have_http_status(:success)
+    end
+
+    it 'updates the homework title' do
+      expect(homework.title).to eq(updates[:title])
+    end
+
+    it 'updates the homework max_score' do
+      expect(homework.max_score).to eq(updates[:max_score])
+    end
   end
 
   describe 'PUT /sections/:id/projects/:project_id sections#update_section_project' do
@@ -73,9 +97,17 @@ RSpec.describe SectionProcessesController, type: :request do
       project.reload
     end
 
-    it 'returns http success' do expect(response).to have_http_status(:success) end
-    it 'updates the project title' do expect(project.title).to eq(updates[:title]) end
-    it 'updates the project max_score' do expect(project.max_score).to eq(updates[:max_score]) end
+    it 'returns http success' do
+      expect(response).to have_http_status(:success)
+    end
+
+    it 'updates the project title' do
+      expect(project.title).to eq(updates[:title])
+    end
+
+    it 'updates the project max_score' do
+      expect(project.max_score).to eq(updates[:max_score])
+    end
   end
 
   describe 'PUT /sections/:id/exams/:exam_id sections#update_section_exam' do
@@ -87,9 +119,17 @@ RSpec.describe SectionProcessesController, type: :request do
       exam.reload
     end
 
-    it 'returns http success' do expect(response).to have_http_status(:success) end
-    it 'updates the exam title' do expect(exam.title).to eq(updates[:title]) end
-    it 'updates the exam max_score' do expect(exam.max_score).to eq(updates[:max_score]) end
+    it 'returns http success' do
+      expect(response).to have_http_status(:success)
+    end
+
+    it 'updates the exam title' do
+      expect(exam.title).to eq(updates[:title])
+    end
+
+    it 'updates the exam max_score' do
+      expect(exam.max_score).to eq(updates[:max_score])
+    end
   end
 
   describe 'PUT /sections/:id/attendances/:attendance_id sections#update_section_attendance' do
@@ -101,8 +141,13 @@ RSpec.describe SectionProcessesController, type: :request do
       attendance.reload
     end
 
-    it 'returns http success' do expect(response).to have_http_status(:success) end
-    it 'updates the attendance date' do expect(attendance.date).to eq(Date.parse(updates[:date])) end
+    it 'returns http success' do
+      expect(response).to have_http_status(:success)
+    end
+
+    it 'updates the attendance date' do
+      expect(attendance.date).to eq(Date.parse(updates[:date]))
+    end
   end
 
   describe 'DELETE /sections/:id/delete sections#destroy_section' do
@@ -110,62 +155,82 @@ RSpec.describe SectionProcessesController, type: :request do
       delete section_delete_path(section)
     end
 
-    it 'returns http success' do expect(response).to have_http_status(:success) end
-    it 'deletes the section' do expect { Section.find(section.id) }.to raise_error(ActiveRecord::RecordNotFound) end
+    it 'returns http success' do
+      expect(response).to have_http_status(:success)
+    end
+
+    it 'deletes the section' do
+      expect { Section.find(section.id) }.to raise_error(ActiveRecord::RecordNotFound)
+    end
   end
 
   describe 'DELETE /sections/:id/seatwork/:seatwork_id sections#destroy_section_seatwork' do
     let(:seatwork) { current_quarter.seatworks.first }
 
-    before do
-      delete section_seatwork_delete_path(id: section.id, seatwork_id: seatwork.id)
+    before { delete section_seatwork_delete_path(id: section.id, seatwork_id: seatwork.id) }
+
+    it 'returns http success' do
+      expect(response).to have_http_status(:success)
     end
 
-    it 'returns http success' do expect(response).to have_http_status(:success) end
-    it 'deletes the section' do expect { current_quarter.seatworks.find(seatwork.id) }.to raise_error(ActiveRecord::RecordNotFound) end
+    it 'deletes the section' do
+      expect { current_quarter.seatworks.find(seatwork.id) }.to raise_error(ActiveRecord::RecordNotFound)
+    end
   end
 
   describe 'DELETE /sections/:id/homework/:homework_id sections#destroy_section_homework' do
     let(:homework) { current_quarter.homeworks.first }
 
-    before do
-      delete section_homework_delete_path(id: section.id, homework_id: homework.id)
+    before { delete section_homework_delete_path(id: section.id, homework_id: homework.id) }
+
+    it 'returns http success' do
+      expect(response).to have_http_status(:success)
     end
 
-    it 'returns http success' do expect(response).to have_http_status(:success) end
-    it 'deletes the homework' do expect { current_quarter.homeworks.find(homework.id) }.to raise_error(ActiveRecord::RecordNotFound) end
+    it 'deletes the homework' do
+      expect { current_quarter.homeworks.find(homework.id) }.to raise_error(ActiveRecord::RecordNotFound)
+    end
   end
 
   describe 'DELETE /sections/:id/projects/:project_id sections#destroy_section_project' do
     let(:project) { current_quarter.projects.first }
 
-    before do
-      delete section_project_delete_path(id: section.id, project_id: project.id)
+    before { delete section_project_delete_path(id: section.id, project_id: project.id) }
+
+    it 'returns http success' do
+      expect(response).to have_http_status(:success)
     end
 
-    it 'returns http success' do expect(response).to have_http_status(:success) end
-    it 'deletes the project' do expect { current_quarter.projects.find(project.id) }.to raise_error(ActiveRecord::RecordNotFound) end
+    it 'deletes the project' do
+      expect { current_quarter.projects.find(project.id) }.to raise_error(ActiveRecord::RecordNotFound)
+    end
   end
 
   describe 'DELETE /sections/:id/exams/:exam_id sections#destroy_section_exam' do
     let(:exam) { current_quarter.exams.first }
 
-    before do
-      delete section_exam_delete_path(id: section.id, exam_id: exam.id)
+    before { delete section_exam_delete_path(id: section.id, exam_id: exam.id) }
+
+    it 'returns http success' do
+      expect(response).to have_http_status(:success)
     end
 
-    it 'returns http success' do expect(response).to have_http_status(:success) end
-    it 'deletes the exam' do expect { current_quarter.exams.find(exam.id) }.to raise_error(ActiveRecord::RecordNotFound) end
+    it 'deletes the exam' do
+      expect { current_quarter.exams.find(exam.id) }.to raise_error(ActiveRecord::RecordNotFound)
+    end
   end
 
   describe 'DELETE /sections/:id/attendances/:attendance_id sections#destroy_section_attendance' do
     let(:attendance) { current_quarter.attendances.first }
 
-    before do
-      delete section_attendance_delete_path(id: section.id, attendance_id: attendance.id)
+    before { delete section_attendance_delete_path(id: section.id, attendance_id: attendance.id) }
+
+    it 'returns http success' do
+      expect(response).to have_http_status(:success)
     end
 
-    it 'returns http success' do expect(response).to have_http_status(:success) end
-    it 'deletes the attendance' do expect { current_quarter.attendances.find(attendance.id) }.to raise_error(ActiveRecord::RecordNotFound) end
+    it 'deletes the attendance' do
+      expect { current_quarter.attendances.find(attendance.id) }.to raise_error(ActiveRecord::RecordNotFound)
+    end
   end
 end
