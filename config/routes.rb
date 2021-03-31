@@ -13,6 +13,20 @@ Rails.application.routes.draw do
   get '/sections/:id/exams', to: 'sections#view_exams', as: 'view_section_exams'
   get '/sections/:id/attendances', to: 'sections#view_attendances', as: 'view_section_attendances'
 
+  # SECTION PROCESSES
+  put '/sections/:id/update', to: 'section_processes#update_section', as: 'section_update'
+  put '/sections/:id/attendances/:attendance_id/update', to: 'section_processes#update_section_attendance', as: 'section_attendance_update'
+  put '/sections/:id/seatworks/:seatwork_id/update', to: 'section_processes#update_section_seatwork', as: 'section_seatwork_update'
+  put '/sections/:id/homeworks/:homework_id/update', to: 'section_processes#update_section_homework', as: 'section_homework_update'
+  put '/sections/:id/projects/:project_id/update', to: 'section_processes#update_section_project', as: 'section_project_update'
+  put '/sections/:id/exams/:exam_id/update', to: 'section_processes#update_section_exam', as: 'section_exam_update'
+  delete '/sections/:id/delete', to: 'section_processes#destroy_section', as: 'section_delete'
+  delete '/sections/:id/seatworks/:seatwork_id/delete', to: 'section_processes#destroy_section_seatwork', as: 'section_seatwork_delete'
+  delete '/sections/:id/homeworks/:homework_id/delete', to: 'section_processes#destroy_section_homework', as: 'section_homework_delete'
+  delete '/sections/:id/projects/:project_id/delete', to: 'section_processes#destroy_section_project', as: 'section_project_delete'
+  delete '/sections/:id/exams/:exam_id/delete', to: 'section_processes#destroy_section_exam', as: 'section_exam_delete'
+  delete '/sections/:id/attendances/:attendance_id/delete', to: 'section_processes#destroy_section_attendance', as: 'section_attendance_delete'
+
   # STUDENT SUBMODELS
   get '/sections/:id/students', to: 'students#index', as: 'students'
   get '/sections/:id/students/:student_id', to: 'students#show', as: 'student'
