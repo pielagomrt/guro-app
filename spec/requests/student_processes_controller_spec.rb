@@ -116,9 +116,7 @@ RSpec.describe StudentProcessesController, type: :request do
   end
 
   describe 'DELETE /sections/:id/students/:student_id/delete student_processes#destroy_student' do
-    before do
-      delete student_delete_path(id: section.id, student_id: student.id)
-    end
+    before { delete student_delete_path(id: section.id, student_id: student.id) }
 
     it 'returns http success' do
       expect(response).to have_http_status(:success)
@@ -132,9 +130,7 @@ RSpec.describe StudentProcessesController, type: :request do
   describe 'DELETE /sections/:id/students/:student_id/seatworks/:seatwork_id/delete student_processes#destroy_student_seatwork' do
     let(:seatwork) { student.seatworks.first }
 
-    before do
-      delete student_delete_seatwork_path(id: section.id, student_id: student.id, seatwork_id: seatwork.id)
-    end
+    before { delete student_delete_seatwork_path(id: section.id, student_id: student.id, seatwork_id: seatwork.id) }
 
     it 'returns http success' do
       expect(response).to have_http_status(:success)
@@ -148,9 +144,7 @@ RSpec.describe StudentProcessesController, type: :request do
   describe 'DELETE /sections/:id/students/:student_id/homeworks/:homework_id/delete student_processes#destroy_student_homework' do
     let(:homework) { student.homeworks.first }
 
-    before do
-      delete student_delete_homework_path(id: section.id, student_id: student.id, homework_id: homework.id)
-    end
+    before { delete student_delete_homework_path(id: section.id, student_id: student.id, homework_id: homework.id) }
 
     it 'returns http success' do
       expect(response).to have_http_status(:success)
@@ -164,9 +158,7 @@ RSpec.describe StudentProcessesController, type: :request do
   describe 'DELETE /sections/:id/students/:student_id/projects/:project_id/delete student_processes#destroy_student_project' do
     let(:project) { student.projects.first }
 
-    before do
-      delete student_delete_project_path(id: section.id, student_id: student.id, project_id: project.id)
-    end
+    before { delete student_delete_project_path(id: section.id, student_id: student.id, project_id: project.id) }
 
     it 'returns http success' do
       expect(response).to have_http_status(:success)
@@ -180,9 +172,7 @@ RSpec.describe StudentProcessesController, type: :request do
   describe 'DELETE /sections/:id/students/:student_id/exams/:exam_id/delete student_processes#destroy_student_exam' do
     let(:exam) { student.exams.first }
 
-    before do
-      delete student_delete_exam_path(id: section.id, student_id: student.id, exam_id: exam.id)
-    end
+    before { delete student_delete_exam_path(id: section.id, student_id: student.id, exam_id: exam.id) }
 
     it 'returns http success' do
       expect(response).to have_http_status(:success)
@@ -196,9 +186,7 @@ RSpec.describe StudentProcessesController, type: :request do
   describe 'DELETE /sections/:id/students/:student_id/absences/:absent_id/delete student_processes#destroy_student_attendance' do
     let(:absent) { student.absents.first }
 
-    before do
-      delete student_delete_attendance_path(id: section.id, student_id: student.id, absent_id: absent.id)
-    end
+    before { delete student_delete_attendance_path(id: section.id, student_id: student.id, absent_id: absent.id) }
 
     it 'returns http success' do
       expect(response).to have_http_status(:success)
