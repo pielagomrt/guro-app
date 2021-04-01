@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :teachers
+  devise_for :teachers, 
+    controllers:  { sessions: 'teachers/sessions', registrations: 'teachers/registrations' },
+    path_names: { sign_in: 'signin', sign_up: 'signup', sign_out: 'signout' }
 
   root 'dashboard#root'
   get '/dashboard', to: 'dashboard#dashboard', as: 'dashboard'

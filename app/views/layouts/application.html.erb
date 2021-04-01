@@ -1,18 +1,34 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>RailsProject</title>
+    <title>Guro</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= render 'layouts/meta_header' %>
   </head>
 
-  <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+  <body id="page-top">
+    <div id="wrapper">
 
-    <%= yield %>
+      <%= render 'components/sidebar' %>
+
+      <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content">
+          <%= render 'components/navbar' %>
+
+          <% if notice %>
+            <p class="notice"><%= notice %></p>
+          <% end %>
+
+          <% if alert %>
+            <p class="alert"><%= alert %></p>
+          <% end %>
+          
+          <%= yield %>
+        </div>
+      </div>
+
+    </div>
   </body>
+  <%= render 'layouts/meta_footer' %>
 </html>
