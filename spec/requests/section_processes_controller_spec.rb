@@ -151,9 +151,7 @@ RSpec.describe SectionProcessesController, type: :request do
   end
 
   describe 'DELETE /sections/:id/delete sections#destroy_section' do
-    before do
-      delete section_delete_path(section)
-    end
+    before { delete section_delete_path(section) }
 
     it 'returns http success' do
       expect(response).to have_http_status(:success)
