@@ -1,7 +1,20 @@
 class CreationProcessesController < ApplicationController
   before_action :authenticate_teacher!
-  before_action :set_section
-  before_action :set_active_quarter
+  before_action :set_section, except: [:create_section]
+  before_action :set_active_quarter, except: [:create_section]
+
+  def create_section
+    section = Section.new(name: params[:details][:name], active_quarter: 1)
+    section.teacher = current_teacher
+    section.grading_system = GradingSystem.find(params[:grading_system])
+    section.save
+
+    students.each do |_, student|
+      new_student = Student.new(first_name: student[:first_name], last_name: student[:last_name], email: student[:email])
+      new_student.section = section
+      new_student.save
+    end
+  end
 
   def create_seatwork
     seatwork = @active_quarter.seatworks.create(params_details)
@@ -69,7 +82,7 @@ class CreationProcessesController < ApplicationController
   end
 
   def params_details
-    params.require(:details).permit(:max_score, :title)
+    params.require(:details).permit(:max_score, :title, :name)
   end
 
   def params_attendance

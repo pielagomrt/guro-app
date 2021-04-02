@@ -60,7 +60,7 @@ Rails.application.routes.draw do
   get '/new/attendance/:section_id', to: 'form#new_attendance', as: 'new_attendance_form'
 
   # PROCESS FORMS
-  # post '/new/section', to: 'creation_processes#create_section', as: 'create_section'
+  post '/new/section', to: 'creation_processes#create_section', as: 'create_section'
   post '/new/seatwork/:section_id', to: 'creation_processes#create_seatwork', as: 'create_seatwork'
   post '/new/homework/:section_id', to: 'creation_processes#create_homework', as: 'create_homework'
   post '/new/project/:section_id', to: 'creation_processes#create_project', as: 'create_project'
