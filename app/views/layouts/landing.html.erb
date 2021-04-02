@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Guro</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= render 'layouts/meta_header' %>
+  </head>
+
+  <body>
+
+    <h1>you are using the LANDING layout!</h1>
+
+    <% if notice %>
+      <p class="notice"><%= notice %></p>
+    <% end %>
+
+    <% if alert %>
+      <p class="alert"><%= alert %></p>
+    <% end %>
+    
+    <%= yield %>
+
+  </body>
+  
+  <%= render 'layouts/meta_footer' %>
+</html>

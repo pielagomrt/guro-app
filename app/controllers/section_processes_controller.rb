@@ -1,4 +1,5 @@
 class SectionProcessesController < ApplicationController
+  before_action :authenticate_teacher!
   before_action :set_section
   before_action :set_active_quarter, except: [:update_section]
 
