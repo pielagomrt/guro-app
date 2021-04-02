@@ -53,9 +53,17 @@ Rails.application.routes.draw do
   
   # FORMS
   get '/new/section', to: 'form#new_section', as: 'new_section_form'
-  get '/new/attendance/:section_id', to: 'form#new_attendance', as: 'new_attendance_form'
   get '/new/seatwork/:section_id', to: 'form#new_seatwork', as: 'new_seatwork_form'
   get '/new/homework/:section_id', to: 'form#new_homework', as: 'new_homework_form'
   get '/new/project/:section_id', to: 'form#new_project', as: 'new_project_form'
   get '/new/exam/:section_id', to: 'form#new_exam', as: 'new_exam_form'
+  get '/new/attendance/:section_id', to: 'form#new_attendance', as: 'new_attendance_form'
+
+  # PROCESS FORMS
+  # post '/new/section', to: 'creation_processes#create_section', as: 'create_section'
+  post '/new/seatwork/:section_id', to: 'creation_processes#create_seatwork', as: 'create_seatwork'
+  post '/new/homework/:section_id', to: 'creation_processes#create_homework', as: 'create_homework'
+  post '/new/project/:section_id', to: 'creation_processes#create_project', as: 'create_project'
+  post '/new/exam/:section_id', to: 'creation_processes#create_exam', as: 'create_exam'
+  post '/new/attendance/:section_id/', to: 'creation_processes#create_absent', as: 'create_absent'
 end
