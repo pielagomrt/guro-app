@@ -65,5 +65,5 @@ Rails.application.routes.draw do
   post '/new/homework/:section_id', to: 'creation_processes#create_homework', as: 'create_homework'
   post '/new/project/:section_id', to: 'creation_processes#create_project', as: 'create_project'
   post '/new/exam/:section_id', to: 'creation_processes#create_exam', as: 'create_exam'
-  post '/new/attendance/:section_id/', to: 'creation_processes#create_absent', as: 'create_absent'
+  post '/new/attendance/:section_id/', to: 'creation_processes#create_attendance', as: 'create_attendance'
 end

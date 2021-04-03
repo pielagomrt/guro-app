@@ -27,7 +27,7 @@ RSpec.describe CreationProcessesController, type: :request do
       3.times { |i| students[i] = attributes_for(:student) }
       post create_section_path, params: {
         details: section_attributes,
-        section_students: { students: students },
+        section_students: students,
         grading_system: teacher.grading_systems.first.id
       }
     end
@@ -53,7 +53,7 @@ RSpec.describe CreationProcessesController, type: :request do
       section.students.each { |student| students[student.id] = { score: 25 } }
       post create_seatwork_path(section_id: section.id), params: {
         details: seatwork,
-        section_students: { students: students }
+        section_students: students
       }
     end
 
@@ -78,7 +78,7 @@ RSpec.describe CreationProcessesController, type: :request do
       section.students.each { |student| students[student.id] = { score: 25 } }
       post create_homework_path(section_id: section.id), params: {
         details: homework,
-        section_students: { students: students }
+        section_students: students
       }
     end
 
@@ -103,7 +103,7 @@ RSpec.describe CreationProcessesController, type: :request do
       section.students.each { |student| students[student.id] = { score: 25 } }
       post create_project_path(section_id: section.id), params: {
         details: project,
-        section_students: { students: students }
+        section_students: students
       }
     end
 
@@ -128,7 +128,7 @@ RSpec.describe CreationProcessesController, type: :request do
       section.students.each { |student| students[student.id] = { score: 25 } }
       post create_exam_path(section_id: section.id), params: {
         details: exam,
-        section_students: { students: students }
+        section_students: students
       }
     end
 
@@ -145,14 +145,19 @@ RSpec.describe CreationProcessesController, type: :request do
     end
   end
 
-  describe 'POST new/absent/:section_id creation_processes#create_absent' do
-    let(:absent) { attributes_for(:quarter_attendance) }
-    let(:student) { section.students.first }
+  describe 'POST new/absent/:section_id creation_processes#create_attendance' do
+    let(:attendance) { attributes_for(:quarter_attendance) }
+    let(:students) { {} }
 
     before do
-      post create_absent_path(section_id: section.id), params: {
-        student_id: student.id,
-        attendance: absent
+      section.students.each { |student| students[student.id] = '1' }
+
+      one_should_be_absent = students.keys.take(1).first
+      students[one_should_be_absent] = '0'
+
+      post create_attendance_path(section_id: section.id), params: {
+        details: attendance,
+        section_students: students
       }
     end
 
@@ -164,8 +169,8 @@ RSpec.describe CreationProcessesController, type: :request do
       expect(Quarter::Attendance.all.length).to eq(1)
     end
 
-    it 'adds absent to student' do
-      expect(Date.parse(absent[:date])).to eq(Quarter::Attendance.find_by(date: absent[:date]).date)
+    it 'adds 1 new absent to student' do
+      expect(Student::Absent.all.length).to eq(1)
     end
   end
 end
