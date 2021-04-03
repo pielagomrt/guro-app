@@ -7,6 +7,9 @@ require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
+import toastr from 'toastr'
+
+window.toastr = toastr
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference

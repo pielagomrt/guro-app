@@ -1,7 +1,13 @@
 class CreationProcessesController < ApplicationController
   before_action :authenticate_teacher!
-  before_action :set_section, except: [:create_section]
-  before_action :set_active_quarter, except: [:create_section]
+  before_action :set_section, except: %i[create_section create_grading_system]
+  before_action :set_active_quarter, except: %i[create_section create_grading_system]
+
+  def create_grading_system
+    grading_system = GradingSystem.new(params_details)
+    grading_system.teacher = current_teacher
+    redirect_to new_grading_system_form_path, notice: 'Successfully created the grading system' if grading_system.save
+  end
 
   def create_section
     year = Time.zone.now.year
@@ -91,7 +97,9 @@ class CreationProcessesController < ApplicationController
   end
 
   def params_details
-    params.require(:details).permit(:max_score, :title, :name, :date)
+    params.require(:details).permit(:max_score, :title, :name,
+                                    :date, :homework, :seatwork,
+                                    :project, :exam, :attendance)
   end
 
   def students

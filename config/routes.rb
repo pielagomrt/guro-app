@@ -53,6 +53,7 @@ Rails.application.routes.draw do
   
   # FORMS
   get '/new/section', to: 'form#new_section', as: 'new_section_form'
+  get '/new/grading-system', to: 'form#new_grading_system', as: 'new_grading_system_form'
   get '/new/seatwork/:section_id', to: 'form#new_seatwork', as: 'new_seatwork_form'
   get '/new/homework/:section_id', to: 'form#new_homework', as: 'new_homework_form'
   get '/new/project/:section_id', to: 'form#new_project', as: 'new_project_form'
@@ -61,6 +62,7 @@ Rails.application.routes.draw do
 
   # PROCESS FORMS
   post '/new/section', to: 'creation_processes#create_section', as: 'create_section'
+  post '/new/grading-system', to: 'creation_processes#create_grading_system', as: 'create_grading_system'
   post '/new/seatwork/:section_id', to: 'creation_processes#create_seatwork', as: 'create_seatwork'
   post '/new/homework/:section_id', to: 'creation_processes#create_homework', as: 'create_homework'
   post '/new/project/:section_id', to: 'creation_processes#create_project', as: 'create_project'

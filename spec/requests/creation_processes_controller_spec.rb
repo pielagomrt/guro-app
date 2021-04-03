@@ -19,6 +19,24 @@ RSpec.describe CreationProcessesController, type: :request do
     section.save
   end
 
+  describe 'POST new/grading-system creation_processes#create_grading_system' do
+    let(:grading_system) { attributes_for(:grading_system) }
+
+    before do
+      post create_grading_system_path, params: {
+        details: grading_system
+      }
+    end
+
+    it 'returns http success' do
+      expect(response).to have_http_status(:success)
+    end
+
+    it 'adds a grading system' do
+      expect(teacher.grading_systems.length).to eq(2)
+    end
+  end
+
   describe 'POST new/section creation_processes#create_section' do
     let(:section_attributes) { attributes_for(:section) }
     let(:students) { {} }

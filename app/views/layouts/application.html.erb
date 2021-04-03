@@ -15,20 +15,21 @@
       <div id="content-wrapper" class="d-flex flex-column">
         <div id="content">
           <%= render 'components/navbar' %>
-
-          <% if notice %>
-            <p class="notice"><%= notice %></p>
-          <% end %>
-
-          <% if alert %>
-            <p class="alert"><%= alert %></p>
-          <% end %>
           
-          <%= yield %>
+          <div class="container-fluid">
+            <%= yield %>
+          </div>
         </div>
       </div>
 
     </div>
   </body>
+
   <%= render 'layouts/meta_footer' %>
+
+  <script>
+    <% if notice %> toastr.success('<%= notice %>', 'Hooray!', { closeButton: true, progressBar: true, positionClass: 'toast-top-center'}) <% end %>
+    <% if alert %> toastr.error('<%= alert %>', 'Oh no!' { closeButton: true, progressBar: true, positionClass: 'toast-top-center'}) <% end %>
+  </script>
+
 </html>
