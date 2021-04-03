@@ -4,6 +4,7 @@ class CreationProcessesController < ApplicationController
   before_action :set_active_quarter, except: [:create_section]
 
   def create_section
+    year = Time.zone.now.year
     section = Section.new(name: params_details[:name], active_quarter: 1)
     section.teacher = current_teacher
     section.grading_system = GradingSystem.find(params[:grading_system])
