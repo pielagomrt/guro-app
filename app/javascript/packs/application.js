@@ -8,6 +8,10 @@ require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 import toastr from 'toastr'
+import '../vendors/bootstrap.bundle.min'
+import '../vendors/jquery.easing.min'
+import '../vendors/admin.min'
+import '../vendors/chart.min'
 
 window.toastr = toastr
 

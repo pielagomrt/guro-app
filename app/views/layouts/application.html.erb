@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Guro</title>
+    <title>Guro | Dashboard</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= render 'layouts/meta_header' %>
@@ -24,8 +24,6 @@
 
     </div>
   </body>
-
-  <%= render 'layouts/meta_footer' %>
 
   <script>
     <% if notice %> toastr.success('<%= notice %>', 'Hooray!', { closeButton: true, progressBar: true, positionClass: 'toast-top-center'}) <% end %>

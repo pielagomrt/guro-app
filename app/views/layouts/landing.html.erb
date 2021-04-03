@@ -14,8 +14,6 @@
     <%= yield %>
 
   </body>
-  
-  <%= render 'layouts/meta_footer' %>
 
   <script>
     <% if notice %> toastr.success('<%= notice %>', 'Hooray!', { closeButton: true, progressBar: true, positionClass: 'toast-top-center'}) <% end %>
