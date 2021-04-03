@@ -5,7 +5,7 @@ class CreationProcessesController < ApplicationController
 
   def create_section
     year = Time.zone.now.year
-    section = Section.new(name: params[:details][:name], active_quarter: 1)
+    section = Section.new(name: params_details[:name], active_quarter: 1)
     section.teacher = current_teacher
     section.grading_system = GradingSystem.find(params[:grading_system])
     section.save
@@ -66,15 +66,18 @@ class CreationProcessesController < ApplicationController
     end
   end
 
-  def create_absent
-    absent = @active_quarter.attendances.create(params_attendance)
-    student = @section.students.find_by(id: params[:student_id])
+  def create_attendance
+    attendance = @active_quarter.attendances.create(params_details)
 
-    new_student_absent = Student::Absent.new
-    new_student_absent.student = student
-    new_student_absent.quarter = @active_quarter
-    new_student_absent.quarter_attendance = absent
-    new_student_absent.save
+    students.each do |student_id, is_absent|
+      next if is_absent.to_i.positive?
+
+      new_student_absent = Student::Absent.new
+      new_student_absent.student_id = student_id.to_i
+      new_student_absent.quarter = @active_quarter
+      new_student_absent.quarter_attendance = attendance
+      new_student_absent.save
+    end
   end
 
   private
@@ -88,14 +91,10 @@ class CreationProcessesController < ApplicationController
   end
 
   def params_details
-    params.require(:details).permit(:max_score, :title, :name)
-  end
-
-  def params_attendance
-    params.require(:attendance).permit(:date)
+    params.require(:details).permit(:max_score, :title, :name, :date)
   end
 
   def students
-    params[:section_students][:students]
+    params[:section_students]
   end
 end
