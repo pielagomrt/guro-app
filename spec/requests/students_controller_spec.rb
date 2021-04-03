@@ -4,7 +4,7 @@ RSpec.describe StudentsController, type: :request do
   let(:teacher) { create(:teacher_with_sections) }
   let(:student) { create(:student) }
   let(:section) { teacher.sections.first }
-  let(:current_quarter) { section.quarters[-section.active_quarter] }
+  let(:current_quarter) { section.quarters.find_by(sequence: section.active_quarter) }
 
   before do
     Faker::Internet.unique.clear
@@ -12,8 +12,7 @@ RSpec.describe StudentsController, type: :request do
     teacher.confirm
     sign_in(teacher)
 
-    section.quarters << Quarter.new(school_year: '2021-2022', sequence: 1, max_attendance: 50)
-    section.quarters << Quarter.new(school_year: '2021-2022', sequence: 2, max_attendance: 50)
+    section.quarters << create(:quarter)
     section.save
 
     current_quarter.seatworks << create(:quarter_seatwork)

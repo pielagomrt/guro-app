@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe CreationProcessesController, type: :request do
   let(:teacher) { create(:teacher_with_sections) }
   let(:section) { teacher.sections.first }
-  let(:current_quarter) { section.quarters[-section.active_quarter] }
+  let(:current_quarter) { section.quarters.find_by(sequence: section.active_quarter) }
 
   before do
     teacher.confirm

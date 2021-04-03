@@ -28,9 +28,7 @@ Teacher.all.each do |teacher|
     new_section.teacher = teacher
     new_section.save
 
-    new_quarter = Quarter.new(school_year: '2021-2022',
-                              sequence: 1,
-                              max_attendance: 50)
+    new_quarter = Quarter.new(school_year: '2021-2022', sequence: 1)
     new_quarter.section = new_section
     new_quarter.save
   end
