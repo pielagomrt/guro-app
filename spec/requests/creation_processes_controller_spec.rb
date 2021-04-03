@@ -28,8 +28,8 @@ RSpec.describe CreationProcessesController, type: :request do
       }
     end
 
-    it 'returns http success' do
-      expect(response).to have_http_status(:success)
+    it 'returns http redirect back to the form' do
+      expect(response).to redirect_to new_grading_system_form_path
     end
 
     it 'adds a grading system' do
