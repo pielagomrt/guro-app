@@ -6,7 +6,10 @@ class CreationProcessesController < ApplicationController
   def create_grading_system
     grading_system = GradingSystem.new(params_details)
     grading_system.teacher = current_teacher
-    redirect_to new_grading_system_form_path, notice: 'Successfully created the grading system' if grading_system.save
+    raise CreateGradingSystemError.new(alert: grading_system.errors.full_messages.first) unless grading_system.save
+
+    flash[:notice] = 'Successfully created the grading system'
+    redirect_to(new_grading_system_form_path)
   end
 
   def create_section

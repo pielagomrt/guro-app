@@ -29,7 +29,7 @@
 
   <script>
     <% if notice %> toastr.success('<%= notice %>', 'Hooray!', { closeButton: true, progressBar: true, positionClass: 'toast-top-center'}) <% end %>
-    <% if alert %> toastr.error('<%= alert %>', 'Oh no!' { closeButton: true, progressBar: true, positionClass: 'toast-top-center'}) <% end %>
+    <% if alert %> toastr.error('<%= alert %>', 'Oh no!', { closeButton: true, progressBar: true, positionClass: 'toast-top-center'}) <% end %>
   </script>
 
 </html>

@@ -35,6 +35,11 @@ RSpec.describe CreationProcessesController, type: :request do
     it 'adds a grading system' do
       expect(teacher.grading_systems.length).to eq(2)
     end
+
+    it 'shows success message' do
+      follow_redirect!
+      expect(response.body).to include('Successfully created the grading system')
+    end
   end
 
   describe 'POST new/section creation_processes#create_section' do
