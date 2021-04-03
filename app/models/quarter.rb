@@ -2,7 +2,6 @@ class Quarter < ApplicationRecord
   include ActiveModel::Validations
   validates_with Validators::QuarterSchoolYear
   validates :sequence, numericality: { only_integer: { in: 1..4 } }
-  validates :max_attendance, presence: true
   belongs_to :section
   has_many :homeworks, dependent: :destroy
   has_many :seatworks, dependent: :destroy

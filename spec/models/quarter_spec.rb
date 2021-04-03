@@ -6,7 +6,6 @@ RSpec.describe Quarter, type: :model do
   before do
     quarter.sequence = 1
     quarter.school_year = '2019-2020'
-    quarter.max_attendance = 20
     quarter.section = create(:section)
     quarter.save
   end
@@ -46,25 +45,6 @@ RSpec.describe Quarter, type: :model do
 
     it '3. should not save without value' do
       expect(quarter.errors.to_h.keys).to include(:school_year)
-    end
-  end
-
-  context 'when validating max_attendance' do
-    before do
-      quarter.max_attendance = nil
-      quarter.save
-    end
-
-    it '1. should not save without value' do
-      expect(quarter).not_to be_valid
-    end
-
-    it '2 should not save without value' do
-      expect(quarter.errors.full_messages.length).to eq(1)
-    end
-
-    it '3. should not save without value' do
-      expect(quarter.errors.to_h.keys).to include(:max_attendance)
     end
   end
 

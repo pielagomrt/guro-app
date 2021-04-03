@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_29_214550) do
+ActiveRecord::Schema.define(version: 2021_04_03_003720) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,7 +75,6 @@ ActiveRecord::Schema.define(version: 2021_03_29_214550) do
   create_table "quarters", force: :cascade do |t|
     t.integer "sequence"
     t.string "school_year"
-    t.integer "max_attendance"
     t.bigint "section_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
