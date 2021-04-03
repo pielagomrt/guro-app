@@ -9,6 +9,11 @@ class CreationProcessesController < ApplicationController
     section.grading_system = GradingSystem.find(params[:grading_system])
     section.save
 
+    4.times do |i|
+      section.quarters << Quarter.create(sequence: i + 1, school_year: "#{year}-#{year + 1}")
+      section.save
+    end
+
     students.each do |_, student|
       new_student = Student.new(first_name: student[:first_name], last_name: student[:last_name], email: student[:email])
       new_student.section = section
@@ -81,7 +86,7 @@ class CreationProcessesController < ApplicationController
   end
 
   def set_active_quarter
-    @active_quarter = @section.quarters[-@section.active_quarter]
+    @active_quarter = @section.quarters.find_by(sequence: @section.active_quarter)
   end
 
   def params_details

@@ -36,6 +36,6 @@ class SectionsController < ApplicationController
   end
 
   def set_active_quarter
-    @active_quarter = @section.quarters[-@section.active_quarter]
+    @active_quarter = @section.quarters.find_by(sequence: @section.active_quarter)
   end
 end
