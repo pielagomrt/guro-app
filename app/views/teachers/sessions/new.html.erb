@@ -1,26 +1,63 @@
-<h2>Log in</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<%= stylesheet_link_tag 'devise_forms.css' %>
+<body class="bg-gradient-primary">
+  <div class="container">
+      <div class="row justify-content-center">
+          <div class="col-xl-10 col-lg-12 col-md-9">
+              <div class="card o-hidden border-0 shadow-lg my-5">
+                  <div class="card-body p-0">
+                      <div class="row">
+                          <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                          <div class="col-lg-6">
+                              <div class="p-5">
+                                  <div class="text-center">
+                                      <h1 class="h4 text-gray-900 mb-4 font-weight-bold">Welcome Back!</h1>
+                                  </div>
+                                  <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'user' }) do |f| %>
+                                      <div class="form-group field">
+                                          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control form-control-user', 'id': "exampleInputEmail", 'aria-describedby': "emailHelp", 'placeholder': "Email" %>
+                                      </div>
+                                      <div class="form-group">
+                                          <%= f.password_field :password, autofocus: true, autocomplete: "current-password", class: 'form-control form-control-user', 'id': "exampleInputPassword", 'placeholder': "Password" %>
+                                      </div>
+                                      <% if devise_mapping.rememberable? %>
+                                      <div class="form-group">
+                                          <div class="custom-control custom-checkbox small field">
+                                              <%= f.check_box :remember_me, class: "custom-control-input", 'id': "customCheck" %>
+                                              <%= f.label :remember_me, class: "custom-control-label", 'for': "customCheck" %>
+                                          </div>
+                                      </div>
+                                      <% end %>
+                                      <div class="actions">
+                                        <%= f.submit "LOGIN", class: "btn btn-primary btn-user btn-block font-weight-bold" %>
+                                      </div>
+                                      <hr>
+                                  <% end %>
+                                  <hr>
+                                  <div class="text-center">
+                                      <%= link_to "CREATE AN ACCOUNT", new_registration_path(resource_name), class: 'small font-weight-bold' %><br />
+                                  </div>
+                                  <div class="text-center small">
+                                      <%= link_to "Forgot your password?", new_password_path(resource_name), class: 'small text-info' %><br />
+                                  </div><br>
+                                  <div class="text-center">
+                                      <%= link_to "BACK TO HOME", root_path, class: 'font-weight-bold small text-muted' %>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
   </div>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+  <!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end %>
+  <!-- Core plugin JavaScript-->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
-
-<%= render "teachers/shared/links" %>
+  <!-- Custom scripts for all pages-->
+  <script src="js/sb-admin-2.min.js"></script>
+</body></html>

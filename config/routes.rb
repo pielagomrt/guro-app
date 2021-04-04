@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :teachers, 
-    controllers:  { sessions: 'teachers/sessions', registrations: 'teachers/registrations' },
+    controllers:  { sessions: 'teachers/sessions', registrations: 'teachers/registrations', confirmations: 'teachers/confirmations', passwords: 'teachers/passwords' },
     path_names: { sign_in: 'signin', sign_up: 'signup', sign_out: 'signout' }
 
   root 'dashboard#root'
