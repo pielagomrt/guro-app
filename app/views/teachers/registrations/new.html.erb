@@ -1,44 +1,61 @@
-<h2>Sign up</h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "teachers/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :subject %><br />
-    <%= f.text_field :subject, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "teachers/shared/links" %>
+<%= stylesheet_link_tag 'devise_forms.css' %>
+<body class="bg-gradient-primary">
+    <div class="container">
+      <%= render "teachers/shared/error_messages", resource: resource %>
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4 font-weight-bold">Create an Account!</h1>
+                            </div>
+                            <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'user' }) do |f| %>
+                                <div class="form-group field">
+                                    <%= f.text_field :subject, class: 'form-control form-control-user', 'id': 'exampleInputSubject', 'placeholder': 'Subject', autofocus: true %>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0 field">
+                                      <%= f.text_field :first_name, class: 'form-control form-control-user', 'id': 'exampleInputFirstName', 'placeholder': 'First Name', autofocus: true %>
+                                    </div>
+                                    <div class="col-sm-6 field">
+                                      <%= f.text_field :last_name, class: 'form-control form-control-user', 'id': 'exampleInputLastName', 'placeholder': 'Last Name', autofocus: true %>
+                                    </div>
+                                </div>
+                                <div class="form-group field">
+                                    <%= f.email_field :email, class: 'form-control form-control-user', 'id': 'exampleInputEmail', 'placeholder': 'Email', autofocus: true, autocomplete: "email" %>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0 field">
+                                      <%= f.password_field :password, class: 'form-control form-control-user', 'id': 'exampleInputPassword', 'placeholder': "Password (#{@minimum_password_length} characters min)", autocomplete: "new-password" %>
+                                    </div>
+                                    <div class="col-sm-6 field">
+                                      <%= f.password_field :password_confirmation, class: 'form-control form-control-user', 'id': 'exampleConfirmPassword', 'placeholder': 'Password Confirmation', autocomplete: "new-password" %>
+                                    </div>
+                                </div>
+                                  <div class="actions">
+                                    <%= f.submit "REGISTER", class: 'btn btn-primary btn-user btn-block font-weight-bold' %>
+                                  </div>
+                                <hr>
+                            <% end %>
+                            <hr>
+                            <div class="text-center small">
+                                <%= link_to "BACK TO LOGIN", new_session_path(resource_name), class: 'font-weight-bold' %><br />
+                            </div>
+                            <div class="text-center small">
+                                <%= link_to "Forgot your password?", new_password_path(resource_name), class: 'small text-info' %><br />
+                            </div>
+                            <div class="text-center small">
+                                <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name), class: 'small text-info' %><br />
+                            </div><br>
+                            <div class="text-center">
+                                <%= link_to "BACK TO HOME", root_path, class: 'font-weight-bold small text-muted' %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 d-none d-lg-block bg-register-image"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body></html>

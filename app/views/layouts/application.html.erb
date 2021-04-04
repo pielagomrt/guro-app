@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>Guro | Dashboard</title>
+    <link href="assets/logo.png" rel="icon" type="image/png" />
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= render 'layouts/meta_header' %>
@@ -15,6 +16,21 @@
       <div id="content-wrapper" class="d-flex flex-column">
         <div id="content">
           <%= render 'components/navbar' %>
+          
+          <% if notice %>
+            <div class="alert alert-primary alert-dismissible fade show mx-auto mt-5" role="alert" style="width: 80%">
+              <p class="notice"><%= notice %></p>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          <% end %>
+
+          <% if alert %>
+            <div class="alert alert-danger mx-auto mt-5" role="alert" style="width: 80%">
+              <p class="alert"><%= alert %></p>
+            </div>
+          <% end %>
           
           <div class="container-fluid">
             <%= yield %>
