@@ -69,24 +69,24 @@ RSpec.describe Teacher, type: :model do
     end
   end
 
-  context 'when saving without password' do
-    before do
-      teacher.password = nil
-      teacher.save
-    end
+  # context 'when saving without password' do
+  #   before do
+  #     teacher.password = nil
+  #     teacher.save
+  #   end
 
-    it '1. should not save without password' do
-      expect(teacher).not_to be_valid
-    end
+  #   it '1. should not save without password' do
+  #     expect(teacher).not_to be_valid
+  #   end
 
-    it '2. should only have one error' do
-      expect(teacher.errors.full_messages.length).to eq(1)
-    end
+  #   it '2. should only have one error' do
+  #     expect(teacher.errors.full_messages.length).to eq(1)
+  #   end
 
-    it '3. should only have an error for password' do
-      expect(teacher.errors.to_h.keys).to include(:password)
-    end
-  end
+  #   it '3. should only have an error for password' do
+  #     expect(teacher.errors.to_h.keys).to include(:password)
+  #   end
+  # end
 
   context 'when saving without subject' do
     before do

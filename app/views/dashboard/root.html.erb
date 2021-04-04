@@ -1,1 +1,52 @@
-<h1>Hi Maam/Sir, this is where the Guro App landing page is rendered</h1>
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <link href="assets/style.scss" rel="stylesheet">
+  </head>
+
+  <body>
+    <header id="header" class="header fixed-top">
+      <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+        <a href="index.html" class="logo d-flex align-items-center">
+          <img src="assets/logo_name.png" alt="" style="height: 200%">
+        </a>
+        <nav id="navbar" class="navbar">
+          <ul>
+            <li><a class="nav-link scrollto active" href="<%= root_path %>">HOME</a></li>
+            <li><a class="nav-link scrollto" href="#">About</a></li>
+            <li><a class="getstarted scrollto" href="teachers/signin">SIGN IN</a></li>
+          </ul>
+          <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav>
+      </div>
+    </header>
+
+    <section id="hero" class="hero d-flex align-items-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 d-flex flex-column justify-content-center">
+            <h1 data-aos="fade-up" style="color: #464646">Modern workspace designed for <span style="color: #4E73DF">teachers</span></h1>
+            <h2 data-aos="fade-up" data-aos-delay="400" class="text-muted small">Keep track of student progress, generate academic reports easily, and find video content for lessons within one platform</h2>
+            <div data-aos="fade-up" data-aos-delay="600">
+              <div class="text-center text-lg-start d-flex justify-content-start">
+                <a href="<%= new_teacher_registration_path %>" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center p-4">
+                  <span>CREATE AN ACCOUNT</span>
+                  <i class="bi bi-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200">
+            <object data="assets/teaching-animate.svg" alt="Hero Img"></object>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

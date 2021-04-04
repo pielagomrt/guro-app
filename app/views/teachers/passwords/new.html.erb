@@ -1,16 +1,44 @@
-<h2>Forgot your password?</h2>
-
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "teachers/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<%= stylesheet_link_tag 'devise_forms.css' %>
+<body class="bg-gradient-primary">
+  <div class="container">
+    <%= render "teachers/shared/error_messages", resource: resource %>
+      <div class="row justify-content-center">
+          <div class="col-xl-5 col-lg-5 col-md-5">
+              <div class="card o-hidden border-0 shadow-lg my-5">
+                  <div class="card-body p-0">
+                    <div class="col-lg">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4 font-weight-bold">Forgot your password?</h1>
+                            </div>
+                            <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: 'user' }) do |f| %>
+                                <div class="form-group field">
+                                    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control form-control-user', 'id': "exampleInputEmail", 'aria-describedby': "emailHelp", 'placeholder': "Email" %>
+                                </div>
+                                <div class="actions">
+                                  <%= f.submit "Send me reset password instructions", class: "btn btn-primary btn-user btn-block font-weight-bold" %>
+                                </div>
+                                <hr>
+                            <% end %>
+                            <hr>
+                            <div class="text-center">
+                                <%= link_to "Create an account", new_registration_path(resource_name), class: 'small font-weight-bold text-info' %><br />
+                            </div>
+                            <div class="text-center">
+                                <%= link_to "Back to login", new_session_path(resource_name), class: 'small font-weight-bold text-info' %><br />
+                            </div>
+                            <div class="text-center small">
+                                <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name), class: 'small text-info' %><br />
+                            </div><br>
+                            <div class="text-center">
+                                <%= link_to "BACK TO HOME", root_path, class: 'font-weight-bold small text-muted' %>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+              </div>
+          </div>
+      </div>
   </div>
+</body>
 
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
-<% end %>
-
-<%= render "teachers/shared/links" %>
