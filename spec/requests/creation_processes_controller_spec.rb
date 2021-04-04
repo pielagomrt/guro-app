@@ -115,8 +115,8 @@ RSpec.describe CreationProcessesController, type: :request do
       }
     end
 
-    it 'returns http success' do
-      expect(response).to have_http_status(:success)
+    it 'returns http redirect back to the form' do
+      expect(response).to redirect_to(new_homework_form_path)
     end
 
     it 'adds 1 new quarter homework' do
@@ -125,6 +125,11 @@ RSpec.describe CreationProcessesController, type: :request do
 
     it 'adds 3 new student homework' do
       expect(students.length).to eq(Student::Homework.all.length)
+    end
+
+    it 'shows success message' do
+      follow_redirect!
+      expect(response.body).to include('Successfully created the homework')
     end
   end
 
@@ -140,8 +145,8 @@ RSpec.describe CreationProcessesController, type: :request do
       }
     end
 
-    it 'returns http success' do
-      expect(response).to have_http_status(:success)
+    it 'returns http redirect back to the form' do
+      expect(response).to redirect_to(new_project_form_path)
     end
 
     it 'adds 1 new quarter project' do
@@ -150,6 +155,11 @@ RSpec.describe CreationProcessesController, type: :request do
 
     it 'adds 3 new student projects' do
       expect(students.length).to eq(Student::Project.all.length)
+    end
+
+    it 'shows success message' do
+      follow_redirect!
+      expect(response.body).to include('Successfully created the project')
     end
   end
 
@@ -165,8 +175,8 @@ RSpec.describe CreationProcessesController, type: :request do
       }
     end
 
-    it 'returns http success' do
-      expect(response).to have_http_status(:success)
+    it 'returns http redirect back to the form' do
+      expect(response).to redirect_to(new_exam_form_path)
     end
 
     it 'adds 1 new quarter exam' do
@@ -175,6 +185,11 @@ RSpec.describe CreationProcessesController, type: :request do
 
     it 'adds 3 new student exams' do
       expect(students.length).to eq(Student::Exam.all.length)
+    end
+
+    it 'shows success message' do
+      follow_redirect!
+      expect(response.body).to include('Successfully created the exam')
     end
   end
 

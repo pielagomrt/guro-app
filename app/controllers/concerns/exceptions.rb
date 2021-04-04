@@ -10,11 +10,11 @@ module Exceptions
       end
     end
 
-    class BadRequestError < StandardError
+    class InvalidScoresError < StandardError
       attr_reader :message, :path
 
       def initialize(data)
-        @message = data[:message]
+        @message = 'Student scores should not exceed the max score'
         @path = data[:path]
         super
       end

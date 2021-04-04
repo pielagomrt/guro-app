@@ -32,49 +32,64 @@ class CreationProcessesController < ApplicationController
     seatwork = @active_quarter.seatworks.new(params_details)
     raise CreationProcessError.new(resource: seatwork, path: new_seatwork_form_path) unless seatwork.save
 
-    raise BadRequestError.new(message: 'Student scores should not exceed the max score', path: new_seatwork_form_path) unless validate_scores(students, seatwork)
+    raise InvalidScoresError.new(path: new_seatwork_form_path) unless validate_scores(seatwork)
 
     students.each do |student_id, value|
-      new_student_seatwork = Student::Seatwork.new(score: value[:score], student_id: student_id.to_i)
-      new_student_seatwork.quarter = @active_quarter
-      new_student_seatwork.quarter_seatwork = seatwork
-      raise CreationProcessError.new(resource: new_student_seatwork, path: new_seatwork_form_path) unless new_student_seatwork.save
+      student_seatwork = Student::Seatwork.new(score: value[:score], student_id: student_id.to_i)
+      student_seatwork.quarter = @active_quarter
+      student_seatwork.quarter_seatwork = seatwork
+      raise CreationProcessError.new(resource: student_seatwork, path: new_seatwork_form_path) unless student_seatwork.save
     end
 
     respond_success('Successfully created the seatwork', new_seatwork_form_path)
   end
 
   def create_homework
-    homework = @active_quarter.homeworks.create(params_details)
+    homework = @active_quarter.homeworks.new(params_details)
+    raise CreationProcessError.new(resource: homework, path: new_homework_form_path) unless homework.save
+
+    raise InvalidScoresError.new(path: new_homework_form_path) unless validate_scores(homework)
 
     students.each do |student_id, value|
-      new_student_homework = Student::Homework.new(score: value[:score], student_id: student_id.to_i)
-      new_student_homework.quarter = @active_quarter
-      new_student_homework.quarter_homework = homework
-      new_student_homework.save
+      student_homework = Student::Homework.new(score: value[:score], student_id: student_id.to_i)
+      student_homework.quarter = @active_quarter
+      student_homework.quarter_homework = homework
+      raise CreationProcessError.new(resource: student_homework, path: new_homework_form_path) unless student_homework.save
     end
+
+    respond_success('Successfully created the homework', new_homework_form_path)
   end
 
   def create_project
     project = @active_quarter.projects.create(params_details)
+    raise CreationProcessError.new(resource: project, path: new_project_form_path) unless project.save
+
+    raise InvalidScoresError.new(path: new_project_form_path) unless validate_scores(project)
 
     students.each do |student_id, value|
-      new_student_project = Student::Project.new(score: value[:score], student_id: student_id.to_i)
-      new_student_project.quarter = @active_quarter
-      new_student_project.quarter_project = project
-      new_student_project.save
+      student_project = Student::Project.new(score: value[:score], student_id: student_id.to_i)
+      student_project.quarter = @active_quarter
+      student_project.quarter_project = project
+      raise CreationProcessError.new(resource: student_project, path: new_project_form_path) unless student_project.save
     end
+
+    respond_success('Successfully created the project', new_project_form_path)
   end
 
   def create_exam
     exam = @active_quarter.exams.create(params_details)
+    raise CreationProcessError.new(resource: exam, path: new_exam_form_path) unless exam.save
+
+    raise InvalidScoresError.new(path: new_exam_form_path) unless validate_scores(exam)
 
     students.each do |student_id, value|
-      new_student_exam = Student::Exam.new(score: value[:score], student_id: student_id.to_i)
-      new_student_exam.quarter = @active_quarter
-      new_student_exam.quarter_exam = exam
-      new_student_exam.save
+      student_exam = Student::Exam.new(score: value[:score], student_id: student_id.to_i)
+      student_exam.quarter = @active_quarter
+      student_exam.quarter_exam = exam
+      raise CreationProcessError.new(resource: student_exam, path: new_exam_form_path) unless student_exam.save
     end
+
+    respond_success('Successfully created the exam', new_exam_form_path)
   end
 
   def create_attendance
@@ -86,11 +101,11 @@ class CreationProcessesController < ApplicationController
     absent_students = section_students - present_students
 
     absent_students.each do |student_id|
-      new_student_absent = Student::Absent.new
-      new_student_absent.student_id = student_id.to_i
-      new_student_absent.quarter = @active_quarter
-      new_student_absent.quarter_attendance = attendance
-      raise CreationProcessError.new(resource: new_student_absent, path: new_attendance_form_path) unless new_student_absent.save
+      student_absent = Student::Absent.new
+      student_absent.student_id = student_id.to_i
+      student_absent.quarter = @active_quarter
+      student_absent.quarter_attendance = attendance
+      raise CreationProcessError.new(resource: student_absent, path: new_attendance_form_path) unless student_absent.save
     end
 
     respond_success('Successfully created the attendance', new_attendance_form_path)
@@ -112,17 +127,17 @@ class CreationProcessesController < ApplicationController
                                     :project, :exam, :attendance)
   end
 
+  def students
+    params[:section_students]
+  end
+
   def respond_success(message, path)
     flash[:notice] = message
     redirect_to(path)
   end
 
-  def validate_scores(students_param, seatwork)
-    scores = students_param.values.pluck(:score)
-    scores.all? { |score| score.to_i <= seatwork.max_score }
-  end
-
-  def students
-    params[:section_students]
+  def validate_scores(requirement)
+    scores = students.values.pluck(:score)
+    scores.all? { |score| score.to_i <= requirement.max_score }
   end
 end
