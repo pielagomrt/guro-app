@@ -7,13 +7,13 @@ export default function mountStudentRow(id, lastRow) {
 
   container.innerHTML = `
     <div class="col-sm-3">
-      <input class="form-control" required="required" autocomplete="false" placeholder="First Name" type="text" name="section_students[${id}[first_name]]" id="section_students[${id}[first_name]]">
+      <input class="form-control" required="required" autocomplete="off" placeholder="First Name" type="text" name="section_students[${id}[first_name]]" id="section_students[${id}[first_name]]">
     </div>
     <div class="col-sm-3">
-      <input class="form-control" required="required" autocomplete="false" placeholder="Last Name" type="text" name="section_students[${id}[last_name]]" id="section_students[${id}[last_name]]">
+      <input class="form-control" required="required" autocomplete="off" placeholder="Last Name" type="text" name="section_students[${id}[last_name]]" id="section_students[${id}[last_name]]">
     </div>
     <div class="col-sm-5">
-      <input class="form-control" required="required" autocomplete="false" placeholder="Email" type="email" name="section_students[${id}[email]]" id="section_students[${id}[email]]">
+      <input class="form-control" required="required" autocomplete="off" placeholder="Email" type="email" name="section_students[${id}[email]]" id="section_students[${id}[email]]">
     </div>
     <div class="col-sm-1 d-flex align-items-center">
       <button name="button" type="button" class="btn btn-danger btn-circle btn-sm" data-id="${id}">

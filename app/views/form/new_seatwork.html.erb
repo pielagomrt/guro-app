@@ -1,2 +1,72 @@
-<h1>Hi Maam/Sir, this is where you create a seatwork for a section</h1>
-<h1>name of the students are rendered automatically</h1>
+<div class="row justify-content-center">
+<div class="col-xl-8 col-lg-7">
+
+  <div class="mb-4 text-gray-800 d-flex align-items-end justify-content-between">
+    <h1 class="h3">New Seatwork</h1>
+    <h3 class='text-primary fw-bold h1' style="font-weight: 600"><%= @section.name %></h3>
+  </div>
+
+</div>
+</div>
+
+<div class="row justify-content-center">
+<div class="col-xl-8 col-lg-7">
+<div class="card shadow mb-4 p-4">
+
+<%= form_with url: create_seatwork_path do |form| %>
+
+  <div class="form-group row">
+    <%= form.label :title, class: 'col-sm-2 col-form-label' %>
+    <div class="col-sm-10">
+      <%= form.text_field :'details[title]', class: 'form-control', required: true, autocomplete: :off %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label :max_score, class: 'col-sm-2 col-form-label' %>
+    <div class="col-sm-10">
+      <%= form.number_field :'details[max_score]', class: 'form-control', required: true %>
+    </div>
+  </div>
+
+  <table class="table table-bordered dataTable table-striped table-hover" style="width: 100%;">
+    <thead>
+        <tr role="row">
+          <th rowspan="1" colspan="1" style="width: 173px;">
+            Student Name
+          </th>
+          <th class="text-center" rowspan="1" colspan="1" style="width: 173px;">
+            Score
+          </th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+      <% @students.each do |student| %>
+        <tr role="row">
+          <td>
+            <b><%= student.last_name %></b>, <%= student.first_name %>
+          </td>
+          <td class='d-flex justify-content-center' style="border-color: transparent">
+            <input type='number' name="section_students[<%= student.id %>[score]]" class="form-control text-center">
+          </td>
+        </tr>
+      <% end %>
+
+    </tbody>
+  </table>
+
+  <div class="form-group">
+    <%= form.button type: 'submit', class: 'btn btn-success btn-circle btn-md float-right' do %>
+      <i class="fas fa-paper-plane"></i>
+    <% end %>
+  </div>
+
+<% end %>
+
+</div>
+</div>
+</div>
+
+<%= javascript_pack_tag 'new_requirement', 'data-turbolinks-track': 'reload' %>

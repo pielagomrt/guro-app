@@ -29,14 +29,19 @@ class CreationProcessesController < ApplicationController
   end
 
   def create_seatwork
-    seatwork = @active_quarter.seatworks.create(params_details)
+    seatwork = @active_quarter.seatworks.new(params_details)
+    raise CreationProcessError.new(resource: seatwork, path: new_seatwork_form_path) unless seatwork.save
+
+    raise BadRequestError.new(message: 'Student scores should not exceed the max score', path: new_seatwork_form_path) unless validate_scores(students, seatwork)
 
     students.each do |student_id, value|
       new_student_seatwork = Student::Seatwork.new(score: value[:score], student_id: student_id.to_i)
       new_student_seatwork.quarter = @active_quarter
       new_student_seatwork.quarter_seatwork = seatwork
-      new_student_seatwork.save
+      raise CreationProcessError.new(resource: new_student_seatwork, path: new_seatwork_form_path) unless new_student_seatwork.save
     end
+
+    respond_success('Successfully created the seatwork', new_seatwork_form_path)
   end
 
   def create_homework
@@ -110,6 +115,11 @@ class CreationProcessesController < ApplicationController
   def respond_success(message, path)
     flash[:notice] = message
     redirect_to(path)
+  end
+
+  def validate_scores(students_param, seatwork)
+    scores = students_param.values.pluck(:score)
+    scores.all? { |score| score.to_i <= seatwork.max_score }
   end
 
   def students

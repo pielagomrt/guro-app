@@ -85,8 +85,8 @@ RSpec.describe CreationProcessesController, type: :request do
       }
     end
 
-    it 'returns http success' do
-      expect(response).to have_http_status(:success)
+    it 'returns http redirect back to the form' do
+      expect(response).to redirect_to(new_seatwork_form_path)
     end
 
     it 'adds 1 new quarter seatwork' do
@@ -95,6 +95,11 @@ RSpec.describe CreationProcessesController, type: :request do
 
     it 'adds 3 new student seatwork' do
       expect(students.length).to eq(Student::Seatwork.all.length)
+    end
+
+    it 'shows success message' do
+      follow_redirect!
+      expect(response.body).to include('Successfully created the seatwork')
     end
   end
 
