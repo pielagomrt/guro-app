@@ -29,7 +29,7 @@ RSpec.describe CreationProcessesController, type: :request do
     end
 
     it 'returns http redirect back to the form' do
-      expect(response).to redirect_to new_grading_system_form_path
+      expect(response).to redirect_to(new_grading_system_form_path)
     end
 
     it 'adds a grading system' do
@@ -55,8 +55,8 @@ RSpec.describe CreationProcessesController, type: :request do
       }
     end
 
-    it 'returns http success' do
-      expect(response).to have_http_status(:success)
+    it 'returns http redirect back to the form' do
+      expect(response).to redirect_to(new_section_form_path)
     end
 
     it 'adds a section' do
@@ -65,6 +65,11 @@ RSpec.describe CreationProcessesController, type: :request do
 
     it 'adds 3 students' do
       expect(Student.all.length).to eq(6) # including the 3 students created on global before do block
+    end
+
+    it 'shows success message' do
+      follow_redirect!
+      expect(response.body).to include('Successfully created the section')
     end
   end
 

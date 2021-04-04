@@ -1,10 +1,11 @@
 module Exceptions
   module ApplicationErrors
-    class CreateGradingSystemError < StandardError
-      attr_reader :alert
+    class CreationProcessError < StandardError
+      attr_reader :resource, :path
 
       def initialize(data)
-        @alert = data[:alert]
+        @resource = data[:resource]
+        @path = data[:path]
         super
       end
     end

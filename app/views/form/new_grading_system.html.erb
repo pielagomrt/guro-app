@@ -2,7 +2,7 @@
 <div class="row justify-content-center">
 <div class="col-xl-8 col-lg-7">
 
-  <h1 class="h3 mb-1 text-gray-800">Add Grading System</h1>
+  <h1 class="h3 mb-1 text-gray-800">New Grading System</h1>
 
   <p class="mb-4">A Grading System will allow you to set the percentage of each requirements that should sum up to 100. This is going to be used upon the generation of report for each students. You can create multiple Grading Systems and apply it to different sections that you are teaching.</p>
 
@@ -52,10 +52,11 @@
 
   <hr>
 
-  <%= form.button type: 'submit', class: 'btn btn-primary btn-user btn-block' do %>
-    <i class="fas fa-plus-circle"></i>
-    Add
-  <% end %>
+  <div class="form-group">
+    <%= form.button type: 'submit', class: 'btn btn-success btn-circle btn-md float-right' do %>
+      <i class="fas fa-paper-plane"></i>
+    <% end %>
+  </div>
 
 <% end %>
  

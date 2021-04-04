@@ -6,10 +6,9 @@ class CreationProcessesController < ApplicationController
   def create_grading_system
     grading_system = GradingSystem.new(params_details)
     grading_system.teacher = current_teacher
-    raise CreateGradingSystemError.new(alert: grading_system.errors.full_messages.first) unless grading_system.save
+    raise CreationProcessError.new(resource: grading_system, path: new_grading_system_form_path) unless grading_system.save
 
-    flash[:notice] = 'Successfully created the grading system'
-    redirect_to(new_grading_system_form_path)
+    respond_success('Successfully created the grading system', new_grading_system_form_path)
   end
 
   def create_section
@@ -17,18 +16,16 @@ class CreationProcessesController < ApplicationController
     section = Section.new(name: params_details[:name], active_quarter: 1)
     section.teacher = current_teacher
     section.grading_system = GradingSystem.find(params[:grading_system])
-    section.save
-
-    4.times do |i|
-      section.quarters << Quarter.create(sequence: i + 1, school_year: "#{year}-#{year + 1}")
-      section.save
-    end
+    4.times { |i| section.quarters << Quarter.create(sequence: i + 1, school_year: "#{year}-#{year + 1}") }
+    raise CreationProcessError.new(resource: section, path: new_section_form_path) unless section.save
 
     students.each do |_, student|
       new_student = Student.new(first_name: student[:first_name], last_name: student[:last_name], email: student[:email])
       new_student.section = section
-      new_student.save
+      raise CreationProcessError.new(resource: new_student, path: new_section_form_path) unless new_student.save
     end
+
+    respond_success('Successfully created the section', new_section_form_path)
   end
 
   def create_seatwork
@@ -103,6 +100,11 @@ class CreationProcessesController < ApplicationController
     params.require(:details).permit(:max_score, :title, :name,
                                     :date, :homework, :seatwork,
                                     :project, :exam, :attendance)
+  end
+
+  def respond_success(message, path)
+    flash[:notice] = message
+    redirect_to(path)
   end
 
   def students
