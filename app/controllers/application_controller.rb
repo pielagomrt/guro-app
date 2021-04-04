@@ -1,4 +1,7 @@
 class ApplicationController < ActionController::Base
+  include Exceptions::ApplicationErrors
+  rescue_from CreationProcessError, with: :handle_creation_process_error
+  rescue_from InvalidScoresError, with: :handle_invalid_scores_error
   before_action :update_allowed_parameters, if: :devise_controller?
 
   protected
@@ -10,5 +13,15 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(*)
     dashboard_path
+  end
+
+  def handle_creation_process_error(error)
+    flash[:alert] = error.resource.errors.full_messages.first
+    redirect_to(error.path)
+  end
+
+  def handle_invalid_scores_error(error)
+    flash[:alert] = error.message
+    redirect_to(error.path)
   end
 end

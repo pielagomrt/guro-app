@@ -13,3 +13,9 @@
  *= require_tree .
  *= require_self
  */
+
+ @import 'toastr/build/toastr.min';
+
+ input[type='checkbox']:hover {
+   cursor: pointer;
+ }

@@ -19,6 +19,29 @@ RSpec.describe CreationProcessesController, type: :request do
     section.save
   end
 
+  describe 'POST new/grading-system creation_processes#create_grading_system' do
+    let(:grading_system) { attributes_for(:grading_system) }
+
+    before do
+      post create_grading_system_path, params: {
+        details: grading_system
+      }
+    end
+
+    it 'returns http redirect back to the form' do
+      expect(response).to redirect_to(new_grading_system_form_path)
+    end
+
+    it 'adds a grading system' do
+      expect(teacher.grading_systems.length).to eq(2)
+    end
+
+    it 'shows success message' do
+      follow_redirect!
+      expect(response.body).to include('Successfully created the grading system')
+    end
+  end
+
   describe 'POST new/section creation_processes#create_section' do
     let(:section_attributes) { attributes_for(:section) }
     let(:students) { {} }
@@ -32,8 +55,8 @@ RSpec.describe CreationProcessesController, type: :request do
       }
     end
 
-    it 'returns http success' do
-      expect(response).to have_http_status(:success)
+    it 'returns http redirect back to the form' do
+      expect(response).to redirect_to(new_section_form_path)
     end
 
     it 'adds a section' do
@@ -42,6 +65,11 @@ RSpec.describe CreationProcessesController, type: :request do
 
     it 'adds 3 students' do
       expect(Student.all.length).to eq(6) # including the 3 students created on global before do block
+    end
+
+    it 'shows success message' do
+      follow_redirect!
+      expect(response.body).to include('Successfully created the section')
     end
   end
 
@@ -57,8 +85,8 @@ RSpec.describe CreationProcessesController, type: :request do
       }
     end
 
-    it 'returns http success' do
-      expect(response).to have_http_status(:success)
+    it 'returns http redirect back to the form' do
+      expect(response).to redirect_to(new_seatwork_form_path)
     end
 
     it 'adds 1 new quarter seatwork' do
@@ -67,6 +95,11 @@ RSpec.describe CreationProcessesController, type: :request do
 
     it 'adds 3 new student seatwork' do
       expect(students.length).to eq(Student::Seatwork.all.length)
+    end
+
+    it 'shows success message' do
+      follow_redirect!
+      expect(response.body).to include('Successfully created the seatwork')
     end
   end
 
@@ -82,8 +115,8 @@ RSpec.describe CreationProcessesController, type: :request do
       }
     end
 
-    it 'returns http success' do
-      expect(response).to have_http_status(:success)
+    it 'returns http redirect back to the form' do
+      expect(response).to redirect_to(new_homework_form_path)
     end
 
     it 'adds 1 new quarter homework' do
@@ -92,6 +125,11 @@ RSpec.describe CreationProcessesController, type: :request do
 
     it 'adds 3 new student homework' do
       expect(students.length).to eq(Student::Homework.all.length)
+    end
+
+    it 'shows success message' do
+      follow_redirect!
+      expect(response.body).to include('Successfully created the homework')
     end
   end
 
@@ -107,8 +145,8 @@ RSpec.describe CreationProcessesController, type: :request do
       }
     end
 
-    it 'returns http success' do
-      expect(response).to have_http_status(:success)
+    it 'returns http redirect back to the form' do
+      expect(response).to redirect_to(new_project_form_path)
     end
 
     it 'adds 1 new quarter project' do
@@ -117,6 +155,11 @@ RSpec.describe CreationProcessesController, type: :request do
 
     it 'adds 3 new student projects' do
       expect(students.length).to eq(Student::Project.all.length)
+    end
+
+    it 'shows success message' do
+      follow_redirect!
+      expect(response.body).to include('Successfully created the project')
     end
   end
 
@@ -132,8 +175,8 @@ RSpec.describe CreationProcessesController, type: :request do
       }
     end
 
-    it 'returns http success' do
-      expect(response).to have_http_status(:success)
+    it 'returns http redirect back to the form' do
+      expect(response).to redirect_to(new_exam_form_path)
     end
 
     it 'adds 1 new quarter exam' do
@@ -143,17 +186,20 @@ RSpec.describe CreationProcessesController, type: :request do
     it 'adds 3 new student exams' do
       expect(students.length).to eq(Student::Exam.all.length)
     end
+
+    it 'shows success message' do
+      follow_redirect!
+      expect(response.body).to include('Successfully created the exam')
+    end
   end
 
-  describe 'POST new/absent/:section_id creation_processes#create_attendance' do
+  describe 'POST new/attendance/:section_id creation_processes#create_attendance' do
     let(:attendance) { attributes_for(:quarter_attendance) }
     let(:students) { {} }
 
     before do
-      section.students.each { |student| students[student.id] = '1' }
-
-      one_should_be_absent = students.keys.take(1).first
-      students[one_should_be_absent] = '0'
+      one_is_present = section.students.map(&:id).take(1)
+      students[one_is_present] = 'on'
 
       post create_attendance_path(section_id: section.id), params: {
         details: attendance,
@@ -162,15 +208,20 @@ RSpec.describe CreationProcessesController, type: :request do
     end
 
     it 'returns http success' do
-      expect(response).to have_http_status(:success)
+      expect(response).to redirect_to(new_attendance_form_path)
     end
 
     it 'adds 1 new quarter attendance' do
       expect(Quarter::Attendance.all.length).to eq(1)
     end
 
-    it 'adds 1 new absent to student' do
-      expect(Student::Absent.all.length).to eq(1)
+    it 'adds 2 new absent to student' do
+      expect(Student::Absent.all.length).to eq(2)
+    end
+
+    it 'shows success message' do
+      follow_redirect!
+      expect(response.body).to include('Successfully created the attendance')
     end
   end
 end

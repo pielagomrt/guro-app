@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Guro</title>
+    <title>Guro | Dashboard</title>
     <link href="assets/logo.png" rel="icon" type="image/png" />
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -40,5 +40,10 @@
 
     </div>
   </body>
-  <%= render 'layouts/meta_footer' %>
+
+  <script>
+    <% if notice %> toastr.success('<%= notice %>', 'Hooray!', { closeButton: true, progressBar: true, positionClass: 'toast-top-center'}) <% end %>
+    <% if alert %> toastr.error('<%= alert %>', 'Oh no!', { closeButton: true, progressBar: true, positionClass: 'toast-top-center'}) <% end %>
+  </script>
+
 </html>

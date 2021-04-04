@@ -1,2 +1,26 @@
-<h1>Hi Maam/Sir, this is where you create a seatwork for a section</h1>
-<h1>name of the students are rendered automatically</h1>
+<div class="row justify-content-center">
+<div class="col-xl-8 col-lg-7">
+
+  <div class="mb-4 text-gray-800 d-flex align-items-end justify-content-between">
+    <h1 class="h3">New Seatwork</h1>
+    <h3 class='text-primary fw-bold h1' style="font-weight: 600"><%= @section.name %></h3>
+  </div>
+
+</div>
+</div>
+
+<div class="row justify-content-center">
+<div class="col-xl-8 col-lg-7">
+<div class="card shadow mb-4 p-4">
+
+<%= form_with url: create_seatwork_path do |form| %>
+
+  <%= render 'form/activity_fields', form: form %>
+
+<% end %>
+
+</div>
+</div>
+</div>
+
+<%= javascript_pack_tag 'new_requirement', 'data-turbolinks-track': 'reload' %>

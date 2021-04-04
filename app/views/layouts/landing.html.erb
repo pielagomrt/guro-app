@@ -9,8 +9,7 @@
   </head>
 
   <body>
-    <!-- <h1>you are using the LANDING layout!</h1> -->
-    <br><br>
+    
     <% if notice %>
       <div class="alert alert-primary alert-dismissible fade show mx-auto mt-5" role="alert" style="width: 75%">
         <p class="notice"><%= notice %></p>
@@ -30,6 +29,10 @@
       <%= yield %>
     </div>
   </body>
+
+  <script>
+    <% if notice %> toastr.success('<%= notice %>', 'Hooray!', { closeButton: true, progressBar: true, positionClass: 'toast-top-center'}) <% end %>
+    <% if alert %> toastr.error('<%= alert %>', 'Oh no!', { closeButton: true, progressBar: true, positionClass: 'toast-top-center'}) <% end %>
+  </script>
   
-  <%= render 'layouts/meta_footer' %>
 </html>

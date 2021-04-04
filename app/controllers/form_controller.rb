@@ -1,6 +1,9 @@
 class FormController < ApplicationController
   before_action :authenticate_teacher!
-  before_action :set_students, except: [:new_section]
+  before_action :set_section_and_students, except: %i[new_section new_grading_system]
+  before_action :set_grading_systems, only: [:new_section]
+
+  def new_grading_system; end
 
   def new_section; end
 
@@ -16,7 +19,12 @@ class FormController < ApplicationController
 
   private
 
-  def set_students
-    @students = Section.find(params[:section_id]).students
+  def set_section_and_students
+    @section = Section.find(params[:section_id])
+    @students = @section.students.order(:last_name)
+  end
+
+  def set_grading_systems
+    @grading_systems = GradingSystem.where(teacher_id: current_teacher.id)
   end
 end
