@@ -173,15 +173,13 @@ RSpec.describe CreationProcessesController, type: :request do
     end
   end
 
-  describe 'POST new/absent/:section_id creation_processes#create_attendance' do
+  describe 'POST new/attendance/:section_id creation_processes#create_attendance' do
     let(:attendance) { attributes_for(:quarter_attendance) }
     let(:students) { {} }
 
     before do
-      section.students.each { |student| students[student.id] = '1' }
-
-      one_should_be_absent = students.keys.take(1).first
-      students[one_should_be_absent] = '0'
+      one_is_present = section.students.map(&:id).take(1)
+      students[one_is_present] = 'on'
 
       post create_attendance_path(section_id: section.id), params: {
         details: attendance,
@@ -190,15 +188,20 @@ RSpec.describe CreationProcessesController, type: :request do
     end
 
     it 'returns http success' do
-      expect(response).to have_http_status(:success)
+      expect(response).to redirect_to(new_attendance_form_path)
     end
 
     it 'adds 1 new quarter attendance' do
       expect(Quarter::Attendance.all.length).to eq(1)
     end
 
-    it 'adds 1 new absent to student' do
-      expect(Student::Absent.all.length).to eq(1)
+    it 'adds 2 new absent to student' do
+      expect(Student::Absent.all.length).to eq(2)
+    end
+
+    it 'shows success message' do
+      follow_redirect!
+      expect(response.body).to include('Successfully created the attendance')
     end
   end
 end

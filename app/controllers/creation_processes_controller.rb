@@ -73,17 +73,22 @@ class CreationProcessesController < ApplicationController
   end
 
   def create_attendance
-    attendance = @active_quarter.attendances.create(params_details)
+    attendance = @active_quarter.attendances.new(params_details)
+    raise CreationProcessError.new(resource: attendance, path: new_attendance_form_path) unless attendance.save
 
-    students.each do |student_id, is_absent|
-      next if is_absent.to_i.positive?
+    section_students = @section.students.map(&:id)
+    present_students = students ? students.keys.map(&:to_i) : []
+    absent_students = section_students - present_students
 
+    absent_students.each do |student_id|
       new_student_absent = Student::Absent.new
       new_student_absent.student_id = student_id.to_i
       new_student_absent.quarter = @active_quarter
       new_student_absent.quarter_attendance = attendance
-      new_student_absent.save
+      raise CreationProcessError.new(resource: new_student_absent, path: new_attendance_form_path) unless new_student_absent.save
     end
+
+    respond_success('Successfully created the attendance', new_attendance_form_path)
   end
 
   private

@@ -48,8 +48,12 @@ RSpec.describe FormController, type: :request do
       expect(response).to render_template(:new_seatwork)
     end
 
+    it 'has @section instance variable' do
+      expect(assigns(:section)).to eq(section)
+    end
+
     it 'has @students instance variable' do
-      expect(assigns(:students)).to eq(section.students)
+      expect(assigns(:students)).to eq(section.students.order(:last_name))
     end
   end
 
@@ -64,8 +68,12 @@ RSpec.describe FormController, type: :request do
       expect(response).to render_template(:new_homework)
     end
 
+    it 'has @section instance variable' do
+      expect(assigns(:section)).to eq(section)
+    end
+
     it 'has @students instance variable' do
-      expect(assigns(:students)).to eq(section.students)
+      expect(assigns(:students)).to eq(section.students.order(:last_name))
     end
   end
 
@@ -80,8 +88,12 @@ RSpec.describe FormController, type: :request do
       expect(response).to render_template(:new_project)
     end
 
+    it 'has @section instance variable' do
+      expect(assigns(:section)).to eq(section)
+    end
+
     it 'has @students instance variable' do
-      expect(assigns(:students)).to eq(section.students)
+      expect(assigns(:students)).to eq(section.students.order(:last_name))
     end
   end
 
@@ -96,8 +108,12 @@ RSpec.describe FormController, type: :request do
       expect(response).to render_template(:new_exam)
     end
 
+    it 'has @section instance variable' do
+      expect(assigns(:section)).to eq(section)
+    end
+
     it 'has @students instance variable' do
-      expect(assigns(:students)).to eq(section.students)
+      expect(assigns(:students)).to eq(section.students.order(:last_name))
     end
   end
 
@@ -112,8 +128,12 @@ RSpec.describe FormController, type: :request do
       expect(response).to render_template(:new_attendance)
     end
 
+    it 'has @section instance variable' do
+      expect(assigns(:section)).to eq(section)
+    end
+
     it 'has @students instance variable' do
-      expect(assigns(:students)).to eq(section.students)
+      expect(assigns(:students)).to eq(section.students.order(:last_name))
     end
   end
 end
