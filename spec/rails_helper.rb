@@ -8,6 +8,7 @@ require 'rspec/rails'
 require 'devise'
 require 'shoulda/matchers'
 require 'factory_bot_rails'
+require 'faker'
 
 Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }
 

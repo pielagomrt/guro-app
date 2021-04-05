@@ -1,0 +1,26 @@
+name: Heroku
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
+        env:
+          HD_MAILTRAP_USERNAME: ${{secrets.MAILTRAP_USERNAME}}
+          HD_MAILTRAP_PASSWORD: ${{secrets.MAILTRAP_PASSWORD}}
+          HD_DISABLE_DATABASE_ENVIRONMENT_CHECK: 1
+          # DISABLE_DATABASE_ENVIRONMENT_CHECK allows heroku to reset production DB
+          # at least while no active real world user is using the app
+          # WARNING! don't use this on a real production application
+          # if disabled, remove the release process type on procfile -rookiemonkey
