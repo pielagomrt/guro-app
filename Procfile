@@ -1,2 +1,2 @@
-release: rails db:migrate && rails db:reset && rails db:seed
+release: rails db:migrate
 web: rails server
