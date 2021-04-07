@@ -1,2 +1,123 @@
-<h1>Hi Maam/Sir, this is where you view a specific student of a section</h1>
-<h1>student information is rendered automatically</h1>
+<!-- <h1>Hi Maam/Sir, this is where you view a specific student of a section</h1>
+<h1>student information is rendered automatically</h1> -->
+
+<div class="card shadow mb-4 mesa">
+  <div class="card-header py-3">
+    <table class="table table-bordered">
+      <thead>
+       <tr>
+         <td class="text-light h6 font-weight-bold" style="background: #4E73DF">QUARTER</td>
+         <td class="text-dark h5 font-weight-bold"><%= @section.active_quarter %></td>
+         <td class="text-light h6 font-weight-bold" style="background: #4E73DF">STUDENT NAME</td>
+         <td class="text-dark h5 font-weight-bold"><%= @student.last_name %>, <%= @student.first_name %></td>
+       </tr>
+      </thead>
+      <tbody>
+      <tr>
+         <td class="text-light h6 font-weight-bold" style="background: #4E73DF">SECTION</td>
+         <td class="text-dark h5 font-weight-bold"><%= @section.name %></td>
+         <td class="text-light h6 font-weight-bold" style="background: #4E73DF">STUDENT EMAIL</td>
+         <td class="text-dark h5 font-weight-bold"><%= @student.email %></td>
+       </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card-body">
+    <div class="d-sm-flex align-items-center justify-content-end mb-4">
+        <a href="#" class="d-none d-sm-inline-block btn btn-primary shadow-sm">
+          <i class="fas fa-download fa-sm text-white-50"></i>
+          Generate Report
+        </a>
+    </div>
+    <div class="row d-flex justify-content-around">
+      <div class="col-xl-6 col-md-6 mb-4">
+        <a href="<%= view_student_seatworks_path(@student.section_id, @student.id) %>">
+          <div class="card border border-primary rounded shadow h-100 py-2">
+            <div class="card-body m-auto">
+              <div class="row no-gutters align-items-center">
+                <div class="col-auto">
+                  <i class="fas fa-book-reader fa-2x text-gray-300"></i>
+                </div>
+                <div class="col ml-4">
+                  <div class="text-bg font-weight-bold text-primary text-uppercase mb-1 h2">SEATWORK</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="col-xl-6 col-md-6 mb-4">
+        <a href="<%= view_student_homeworks_path(@student.section_id, @student.id) %>">
+          <div class="card border border-primary rounded shadow h-100 py-2">
+            <div class="card-body m-auto">
+              <div class="row no-gutters align-items-center">
+                <div class="col-auto">
+                  <i class="fas fa-home fa-2x text-gray-300"></i>
+                </div>
+                <div class="col ml-3">
+                  <div class="text-bg font-weight-bold text-primary text-uppercase mb-1 h2">HOMEWORK</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="row d-flex justify-content-around">
+      <div class="col-xl-6 col-md-6 mb-4">
+        <a href="<%= view_student_projects_path(@student.section_id, @student.id) %>">
+          <div class="card border border-primary rounded shadow h-100 py-2">
+            <div class="card-body m-auto">
+              <div class="row no-gutters align-items-center">
+                <div class="col-auto">
+                  <i class="fas fa-project-diagram fa-2x text-gray-300"></i>
+                </div>
+                <div class="col ml-4">
+                  <div class="text-bg font-weight-bold text-primary text-uppercase mb-1 h2">PROJECTS</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="col-xl-6 col-md-6 mb-4">
+        <a href="<%= view_student_exams_path(@student.section_id, @student.id) %>">
+          <div class="card border border-primary rounded shadow h-100 py-2">
+            <div class="card-body m-auto">
+              <div class="row no-gutters align-items-center">
+                <div class="col-auto">
+                  <i class="fas fa-file-signature fa-2x text-gray-300"></i>
+                </div>
+                <div class="col ml-3">
+                  <div class="text-bg font-weight-bold text-primary text-uppercase mb-1 h2">EXAMS</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+      <div class="col-xl-6 col-md-6 mb-4">
+        <a href="<%= view_student_absences_path(@student.section_id, @student.id) %>">
+          <div class="card border border-primary rounded shadow h-100 py-2">
+            <div class="card-body m-auto">
+              <div class="row no-gutters align-items-center">
+                <div class="col-auto">
+                  <i class="fas fa-user-check fa-2x text-gray-300"></i>
+                </div>
+                <div class="col ml-3">
+                  <div class="text-bg font-weight-bold text-primary text-uppercase mb-1 h2">ATTENDANCE</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="d-flex justify-content-center">
+  <%= link_to 'GO BACK', students_path(@student.section_id), class: "btn btn-info px-4 font-weight-bold", 'style': "background: #4E73DF" %>
+</div><br>

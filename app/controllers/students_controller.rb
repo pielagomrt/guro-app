@@ -1,9 +1,10 @@
 class StudentsController < ApplicationController
   before_action :authenticate_teacher!
   before_action :set_student, except: [:index]
-  before_action :set_active_quarter, except: %i[index show]
+  before_action :set_active_quarter, except: [:index]
 
   def index
+    @section = Section.find(params[:id])
     @students = Section.find(params[:id]).students
   end
 
@@ -36,7 +37,7 @@ class StudentsController < ApplicationController
   end
 
   def set_active_quarter
-    section = @student.section
-    @active_quarter = section.quarters.find_by(sequence: section.active_quarter)
+    @section = @student.section
+    @active_quarter = @section.quarters.find_by(sequence: @section.active_quarter)
   end
 end

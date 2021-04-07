@@ -1,1 +1,70 @@
 <h1>Hi Maam/Sir, you will see here the summary of your account and some educational videos related to your teaching subject that you can use or reference in your class</h1>
+
+<div class="row">
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            SUBJECT</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800"><%= current_teacher.subject.upcase %></div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-book fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            NUMBER OF SECTIONS</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800"><%= current_teacher.sections.count %></div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-chalkboard-teacher fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-info shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                            NUMBER OF STUDENTS</div>
+                        <% if current_teacher %>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><%= Student.count %></div>
+                        <% end %>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-users fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                            ONE MORE HERE</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">ONE MORE HERE</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-laugh-beam fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
