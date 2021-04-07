@@ -5,46 +5,57 @@ class StudentProcessesController < ApplicationController
 
   def update_student
     @student.update(params_student)
+    redirect_to students_path(@section)
   end
 
   def update_student_seatwork
     @student.seatworks.find(params[:seatwork_id]).update(params_score)
+    redirect_to view_student_seatworks_path(@section, @student)
   end
 
   def update_student_homework
     @student.homeworks.find(params[:homework_id]).update(params_score)
+    redirect_to view_student_homeworks_path(@section, @student)
   end
 
   def update_student_project
     @student.projects.find(params[:project_id]).update(params_score)
+    redirect_to view_student_projects_path(@section, @student)
   end
 
   def update_student_exam
     @student.exams.find(params[:exam_id]).update(params_score)
+    redirect_to view_student_exams_path(@section, @student)
   end
 
   def destroy_student
     @student.destroy
+    redirect_to students_path(@section)
   end
 
   def destroy_student_seatwork
     @student.seatworks.find(params[:seatwork_id]).destroy
+    redirect_to view_student_seatworks_path(@section, @student)
   end
 
   def destroy_student_homework
     @student.homeworks.find(params[:homework_id]).destroy
+    redirect_to view_student_homeworks_path(@section, @student)
   end
 
   def destroy_student_project
     @student.projects.find(params[:project_id]).destroy
+    redirect_to view_student_projects_path(@section, @student)
   end
 
   def destroy_student_exam
     @student.exams.find(params[:exam_id]).destroy
+    redirect_to view_student_exams_path(@section, @student)
   end
 
   def destroy_student_attendance
     @student.absents.find(params[:absent_id]).destroy
+    redirect_to view_student_absences_path(@section, @student)
   end
 
   private

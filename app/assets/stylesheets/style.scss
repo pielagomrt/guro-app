@@ -24,7 +24,7 @@ a {
 
 a:hover {
   color: #717ff5;
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -106,7 +106,7 @@ section {
 }
 
 .breadcrumbs ol a:hover {
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 .breadcrumbs ol li + li {
@@ -251,6 +251,7 @@ section {
 .navbar .getstarted:hover {
   color: #fff;
   background: #5969f3;
+  text-decoration: none;
 }
 
 .navbar .dropdown ul {
@@ -2367,4 +2368,20 @@ section {
   text-align: center;
   font-size: 13px;
   color: #012970;
+}
+
+/*--------------------------------------------------------------
+# Misc Adjustments
+--------------------------------------------------------------*/
+
+/*---- table margin ----*/
+
+.mesa {
+  width: 75%;
+  margin: auto;
+}
+
+.mesa-absent {
+  width: 60%;
+  margin: auto;
 }

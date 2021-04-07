@@ -1,2 +1,118 @@
-<h1>Hi Maam/Sir, this is where you view the homework list of a specific student of a section</h1>
-<h1>student homework list is rendered automatically</h1>
+<!-- <h1>Hi Maam/Sir, this is where you view the homework list of a specific student of a section</h1>
+<h1>student homework list is rendered automatically</h1> -->
+
+<div class="card shadow mb-4 mesa">
+  <div class="card-header py-3 table-responsive">
+    <!-- <h6 class="m-0 text-muted mb-2">QUARTER : <span class="ml-5 pl-5 text-primary h5 font-weight-bold"><%= @section.active_quarter %></h6>
+    <h6 class="m-0 text-muted mb-2">SECTION : <span class="ml-5 pl-5 text-primary h5 font-weight-bold"><%= @section.name.upcase %></h6><br>
+    <h6 class="m-0 text-muted mb-2">STUDENT NAME : <span class="ml-4 pl-3 text-primary h5 font-weight-bold"><%= @student.last_name %>, <%= @student.first_name %></span></h6>
+    <h6 class="m-0 text-muted mb-2">STUDENT EMAIL : <span class="ml-4 pl-3 text-primary h5 font-weight-bold"><%= @student.email %></span></h6> -->
+    
+    <table class="table table-bordered">
+      <thead>
+       <tr>
+         <td class="text-light h6 font-weight-bold" style="background: #4E73DF">QUARTER</td>
+         <td class="text-dark h5 font-weight-bold"><%= @section.active_quarter %></td>
+         <td class="text-light h6 font-weight-bold" style="background: #4E73DF">STUDENT NAME</td>
+         <td class="text-dark h5 font-weight-bold"><%= @student.last_name %>, <%= @student.first_name %></td>
+       </tr>
+      </thead>
+      <tbody>
+      <tr>
+         <td class="text-light h6 font-weight-bold" style="background: #4E73DF">SECTION</td>
+         <td class="text-dark h5 font-weight-bold"><%= @section.name %></td>
+         <td class="text-light h6 font-weight-bold" style="background: #4E73DF">STUDENT EMAIL</td>
+         <td class="text-dark h5 font-weight-bold"><%= @student.email %></td>
+       </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered" id="dataTable" width="200" cellspacing="0">
+        <thead>
+          <tr class="text-dark">
+            <th scope="col" class="text-primary">HOMEWORK</th>
+            <th scope="col">Raw Score</th>
+            <th scope="col">Max Score</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @student_homeworks.each do |homework| %>
+            <tr>
+              <td><%= homework.quarter_homework.title %></td>
+              <td class="font-weight-bold text-primary"><%= homework.score %></td>
+              <td><%= homework.quarter_homework.max_score %></td>
+              <td>
+                <div class="d-flex">
+                  <a class="dropdown-item text-warning text-center" href="#" data-toggle="modal" data-target="#updateHomeworkModal_<%= homework.id %>">
+                      <i class="fas fa-edit"></i>
+                  </a>
+                  <a class="dropdown-item text-danger text-center" href="#" data-toggle="modal" data-target="#deleteHomeworkModal_<%= homework.id %>">
+                      <i class="fas fa-trash"></i>
+                  </a>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>    
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="d-flex justify-content-center">
+  <%= link_to 'GO BACK', student_path(@student.section_id, @student.id), class: "btn btn-info px-4 font-weight-bold", 'style': "background: #4E73DF" %>
+</div>
+
+<%# UPDATE HOMEWORK MODAL %>
+<% @student_homeworks.each do |homework| %>
+  <div class="modal fade" id="updateHomeworkModal_<%= homework.id %>" tabindex="-1" role="dialog" aria-labelledby="homework_update_modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Homework</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p class="mb-4 font-weight-bold h3 text-dark text-center"><%= homework.quarter_homework.title.upcase %></p>
+          <%= form_with method: :put, scope: :student_score, url: student_update_homework_path(id: @student.section_id, student_id: @student.id, homework_id: homework.id), local: true do |f| %>
+            <div class = "form-group d-flex justify-content-center align-items-center">
+              <%= f.label :score, class: 'h4 my-2 mx-2 mr-3 font-weight-bold' %>
+              <%= f.number_field :score, 'style': "width: 15%", class: "form-control" %>
+              <%= f.submit "Update", class:'btn btn-warning my-2 mx-2 ml-3' %></br>
+            </div>
+          <% end %>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<%# DELETE HOMEWORK MODAL %>
+<% @student_homeworks.each do |homework| %>
+  <div class="modal fade" id="deleteHomeworkModal_<%= homework.id %>" tabindex="-1" role="dialog" aria-labelledby="homework_delete_modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Delete Homework</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body text-center">
+          <p class="mb-2 font-weight-bold h3 text-dark"><%= homework.quarter_homework.title.upcase %></p>
+          <p class="text-danger h6">Are you sure you want to delete this record?<br>This process cannot be undone.</p><br>
+          <%= link_to 'Delete', student_delete_homework_path(id: @student.section_id, student_id: @student.id, homework_id: homework.id), class: 'btn btn-danger px-5', method: 'delete' %>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -1,16 +1,15 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-      <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fas fa-laugh-wink"></i>
+  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<%= dashboard_path %>">
+      <div>
+          <%= image_tag asset_path('logo_name_white.png'), class: "img-profile", 'style': 'width: 60%' %>
       </div>
-      <div class="sidebar-brand-text mx-3">Guro</div>
   </a>
 
   <hr class="sidebar-divider my-0">
 
   <li class="nav-item active">
-      <a class="nav-link" href="index.html">
+      <a class="nav-link" href="<%= dashboard_path %>">
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Dashboard</span>
       </a>
@@ -18,32 +17,61 @@
 
   <hr class="sidebar-divider">
 
+  <li class="mx-3">
+    <div>
+        <%= link_to new_section_form_path, class: "text-light font-weight-bold mb-3 btn btn-success btn-sm d-block" do %>
+            <i class="fas fa-fw fa-user-plus text-light mr-2"></i>
+            New Section
+        <% end %>
+        <%= link_to new_grading_system_form_path, class: "text-light font-weight-bold btn btn-success btn-sm d-block" do %>
+            <i class="fas fa-fw fa-list-alt text-light mr-2"></i>
+            New Grading System
+        <% end %>
+    </div>
+  </li>
+
+  <hr class="sidebar-divider mt-3">
+
   <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-          <i class="fas fa-fw fa-cog"></i>
+          <i class="fas fa-fw fa-chalkboard-teacher"></i>
           <span>Sections</span>
       </a>
       <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
               <h6 class="collapse-header">Sections being handled:</h6>
-              <a class="collapse-item" href="buttons.html">BidaBida One</a>
-              <a class="collapse-item" href="cards.html">BidaBida Two</a>
+              <% current_teacher.sections.each do |section| %>
+                <a class="collapse-item font-weight-bold" href="<%= section_path(section.id) %>"><%= section.name.upcase %></a>
+              <!-- <a class="collapse-item" href="buttons.html">BidaBida One</a> -->
+              <!-- <a class="collapse-item" href="cards.html">BidaBida Two</a> -->
+              <% end %>
+          </div>
+      </div>
+  </li>
+
+  <li class="nav-item">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseTwo">
+          <i class="fas fa-fw fa-users"></i>
+          <span>Students</span>
+      </a>
+      <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+              <h6 class="collapse-header">Students List:</h6>
+              <% current_teacher.sections.each do |section| %>
+                <a class="collapse-item font-weight-bold" href="<%= students_path(section.id) %>"><%= section.name.upcase %></a>
+              <!-- <a class="collapse-item" href="buttons.html">BidaBida One</a> -->
+              <!-- <a class="collapse-item" href="cards.html">BidaBida Two</a> -->
+              <% end %>
           </div>
       </div>
   </li>
 
   <li class="nav-item">
       <a class="nav-link" href="#">
-          <i class="fas fa-fw fa-wrench"></i>
-          <span>Students</span>
-      </a>
-  </li>
-
-  <li class="nav-item">
-      <a class="nav-link" href="#">
-          <i class="fas fa-fw fa-wrench"></i>
+          <i class="fas fa-fw fa-file-alt"></i>
           <span>Reports</span>
       </a>
-  </li>
+  </li>            
 
 </ul>
+
