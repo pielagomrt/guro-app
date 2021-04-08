@@ -36,7 +36,7 @@ class SectionProcessesController < ApplicationController
   def destroy_section
     @section.destroy
     redirect_to dashboard_path
-    flash[:alert] = "#{@section.name} has been deleted."
+    flash[:notice] = "Section #{@section.name.upcase} has been deleted."
   end
 
   def destroy_section_seatwork

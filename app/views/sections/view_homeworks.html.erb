@@ -1,1 +1,109 @@
-<h1>Hi Maam/Sir, this is where you view the homworks of a section depending on current active_quarter</h1>
+<!-- <h1>Hi Maam/Sir, this is where you view the homworks of a section depending on current active_quarter</h1> -->
+
+<div class="card shadow mb-4 mesa">
+  <div class="card-header py-3 table-responsive d-flex justify-content-around">
+    <h5 class="m-0 text-muted mb-2">QUARTER : <span class="ml-3 px-3 text-light font-weight-bold bg-primary rounded"><%= @section.active_quarter %></h5>
+    <h5 class="m-0 text-muted mb-2">SECTION : <span class="ml-3 px-3 text-light font-weight-bold bg-primary rounded"><%= @section.name.upcase %></h5>
+    <h5 class="m-0 text-muted mb-2">NO. OF STUDENTS : <span class="ml-3 px-3 text-light font-weight-bold bg-primary rounded"><%= @section.students.count %></span></h5>
+  </div>
+  <div class="m-auto">
+    <a href="<%= new_homework_form_path(@section.id) %>" class="btn btn-success btn-icon-split mt-3">
+      <span class="icon text-white-50">
+        <i class="fas fa-plus"></i>
+      </span>
+      <span class="text">New Homework</span>
+    </a>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered" id="dataTable" width="200" cellspacing="0">
+        <thead style="background: #5B8266; color: white">
+          <tr>
+            <th scope="col">HOMEWORK</th>
+            <th scope="col">Max Score</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @homeworks.each do |homework| %>
+            <tr>
+              <td><%= homework.title %></td>
+              <td style="color: #5B8266" class="font-weight-bold"><%= homework.max_score %></td>
+              <td>
+                <div class="d-flex justify-content-around">
+                  <a class="btn btn-warning btn-circle text-center" href="#" data-toggle="modal" data-target="#updateHomeworkModal_<%= homework.id %>">
+                      <i class="fas fa-pencil-alt"></i>
+                  </a>
+                  <a class="btn btn-danger btn-circle text-center" href="#" data-toggle="modal" data-target="#deleteHomeworkModal_<%= homework.id %>">
+                      <i class="fas fa-trash"></i>
+                  </a>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>    
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="d-flex justify-content-center">
+  <%= link_to 'GO BACK', section_path(@section.id), class: "btn btn-info px-4 font-weight-bold", 'style': "background: #5B8266; border-color: #5B8266;" %>
+</div>
+
+<%# UPDATE HOMEWORK MODAL %>
+<% @homeworks.each do |homework| %>
+  <div class="modal fade" id="updateHomeworkModal_<%= homework.id %>" tabindex="-1" role="dialog" aria-labelledby="homework_update_modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Homework</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p class="mb-4 font-weight-bold h3 text-dark text-center"><%= homework.title.upcase %></p>
+          <%= form_with method: :put, scope: :quarter, url: section_homework_update_path(id: @section.id, homework_id: homework.id), local: true do |f| %>
+            <div class="text-center">
+              <div class="form-group">
+                <%= f.text_field :title, 'placeholder': 'Title', required: true, class: "form-control m-auto text-center", 'style': "width: 50%" %>
+              </div>
+              <div class="form-group">
+                <%= f.number_field :max_score, 'placeholder': 'Max Score', required: true, class: "form-control m-auto text-center", 'style': "width: 50%" %>
+              </div>
+            </div>
+            <div class="text-center">
+            <%= f.submit "UPDATE", class:'btn btn-warning text-center', 'style': "width: 50%" %></br>
+            </div>
+          <% end %>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<%# DELETE HOMEWORK MODAL %>
+<% @homeworks.each do |homework| %>
+  <div class="modal fade" id="deleteHomeworkModal_<%= homework.id %>" tabindex="-1" role="dialog" aria-labelledby="homework_delete_modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Delete Homework</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body text-center">
+          <p class="mb-2 font-weight-bold h3 text-dark"><%= homework.title.upcase %></p>
+          <p class="text-danger h6">Are you sure you want to delete this record?<br>This process cannot be undone.</p><br>
+          <%= link_to 'DELETE', section_homework_delete_path(id: @section.id, homework_id: homework.id), class: 'btn btn-danger px-5', method: :delete %>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

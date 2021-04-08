@@ -1,43 +1,26 @@
 <!-- <h1>Hi Maam/Sir, this is where you view the details of a section</h1> -->
 
 <div class="card shadow mb-4 mesa">
-  <!-- <div class="card-header py-3">
-    <table class="table table-bordered">
-      <thead>
-       <tr>
-         <td class="text-light h6 font-weight-bold" style="background: #4E73DF">QUARTER</td>
-         <td class="text-dark h5 font-weight-bold"><%= @section.active_quarter %></td>
-       </tr>
-      </thead>
-      <tbody>
-      <tr>
-         <td class="text-light h6 font-weight-bold" style="background: #4E73DF">SECTION</td>
-         <td class="text-dark h5 font-weight-bold"><%= @section.name %></td>
-       </tr>
-      </tbody>
-    </table>
-  </div> -->
-  
   <div class="card-header py-3 table-responsive d-flex justify-content-around">
-    <h5 class="m-0 text-muted mb-2">QUARTER : <span class="ml-3 pl-3 text-primary font-weight-bold"><%= @section.active_quarter %></h5>
-    <h5 class="m-0 text-muted mb-2">SECTION : <span class="ml-3 pl-3 text-primary font-weight-bold"><%= @section.name.upcase %></h5>
-    <h5 class="m-0 text-muted mb-2">NO. OF STUDENTS : <span class="ml-3 pl-3 text-primary font-weight-bold"><%= @section.students.count %></span></h5>
+    <h5 class="m-0 text-muted mb-2">QUARTER : <span class="ml-3 px-3 text-light font-weight-bold bg-primary rounded"><%= @section.active_quarter %></h5>
+    <h5 class="m-0 text-muted mb-2">SECTION : <span class="ml-3 px-3 text-light font-weight-bold bg-primary rounded"><%= @section.name.upcase %></h5>
+    <h5 class="m-0 text-muted mb-2">NO. OF STUDENTS : <span class="ml-3 px-3 text-light font-weight-bold bg-primary rounded"><%= @section.students.count %></span></h5>
   </div>
-
   <div class="card-body">
-      <div class="d-sm-flex mb-4">
-        <a class="btn btn-warning btn-circle text-center mr-2" href="#" data-toggle="modal" data-target="#updateSectionModal_<%= @section.id %>">
-          <i class="fas fa-pencil-alt"></i>
-        </a>
-        <a class="btn btn-danger btn-circle text-center" href="#" data-toggle="modal" data-target="#deleteSectionModal_<%= @section.id %>">
-          <i class="fas fa-trash"></i>
-        </a>
-        <a href="#" class="d-none d-sm-inline-block btn btn-primary shadow-sm ml-auto">
-          <i class="fas fa-download fa-sm text-white-50"></i>
-          Generate Report
-        </a>
+    <div class="d-sm-flex mb-5">
+      <a class="btn btn-warning btn-circle text-center mr-2" href="#" data-toggle="modal" data-target="#updateSectionModal_<%= @section.id %>">
+        <i class="fas fa-pencil-alt"></i>
+      </a>
+      <a class="btn btn-danger btn-circle text-center" href="#" data-toggle="modal" data-target="#deleteSectionModal_<%= @section.id %>">
+        <i class="fas fa-trash"></i>
+      </a>
+      <a href="#" class="btn btn-primary btn-icon-split ml-auto">
+        <span class="icon text-white-50">
+          <i class="fas fa-download"></i>
+        </span>
+        <span class="text">Generate Report</span>
+      </a>
     </div>
-        
     <div class="row d-flex justify-content-around">
       <div class="col-xl-6 col-md-6 mb-4">
         <a href="<%= view_section_seatworks_path(@section.id) %>">
@@ -127,11 +110,6 @@
   </div>
 </div>
 
-<div class="d-flex justify-content-center">
-  <%= link_to 'GO BACK', section_path(@section.id), class: "btn btn-info px-4 font-weight-bold", 'style': "background: #4E73DF" %>
-</div><br>
-
-
 <%# UPDATE SECTION MODAL %>
   <div class="modal fade" id="updateSectionModal_<%= @section.id %>" tabindex="-1" role="dialog" aria-labelledby="section_update_modal" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -186,4 +164,3 @@
       </div>
     </div>
   </div>
-
