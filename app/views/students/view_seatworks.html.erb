@@ -32,7 +32,7 @@
       <table class="table table-bordered" id="dataTable" width="200" cellspacing="0">
         <thead>
           <tr class="text-dark">
-            <th scope="col" class="text-primary">SEATWORK</th>
+            <th scope="col" style="color: #AB4967">SEATWORK</th>
             <th scope="col">Raw Score</th>
             <th scope="col">Max Score</th>
             <th></th>
@@ -42,14 +42,14 @@
           <% @student_seatworks.each do |seatwork| %>
             <tr>
               <td><%= seatwork.quarter_seatwork.title %></td>
-              <td class="font-weight-bold text-primary"><%= seatwork.score %></td>
+              <td class="font-weight-bold" style="color: #AB4967"><%= seatwork.score %></td>
               <td><%= seatwork.quarter_seatwork.max_score %></td>
               <td>
-                <div class="d-flex">
-                  <a class="dropdown-item text-warning text-center" href="#" data-toggle="modal" data-target="#updateSeatworkModal_<%= seatwork.id %>">
-                      <i class="fas fa-edit"></i>
+                <div class="d-flex justify-content-around">
+                  <a class="btn btn-warning btn-circle text-center" href="#" data-toggle="modal" data-target="#updateSeatworkModal_<%= seatwork.id %>">
+                      <i class="fas fa-pencil-alt"></i>
                   </a>
-                  <a class="dropdown-item text-danger text-center" href="#" data-toggle="modal" data-target="#deleteSeatworkModal_<%= seatwork.id %>">
+                  <a class="btn btn-danger btn-circle text-center" href="#" data-toggle="modal" data-target="#deleteSeatworkModal_<%= seatwork.id %>">
                       <i class="fas fa-trash"></i>
                   </a>
                 </div>
@@ -63,7 +63,7 @@
 </div>
 
 <div class="d-flex justify-content-center">
-  <%= link_to 'GO BACK', student_path(@student.section_id, @student.id), class: "btn btn-info px-4 font-weight-bold", 'style': "background: #4E73DF" %>
+  <%= link_to 'GO BACK', student_path(@student.section_id, @student.id), class: "btn btn-info px-4 font-weight-bold", 'style': "background: #AB4967; border-color: #AB4967;" %>
 </div>
 
 <%# UPDATE SEATWORK MODAL %>
@@ -83,7 +83,7 @@
             <div class = "form-group d-flex justify-content-center align-items-center">
               <%= f.label :score, class: 'h4 my-2 mx-2 mr-3 font-weight-bold' %>
               <%= f.number_field :score, 'style': "width: 15%", class: "form-control" %>
-              <%= f.submit "Update", class:'btn btn-warning my-2 mx-2 ml-3' %></br>
+              <%= f.submit "UPDATE", class:'btn btn-warning my-2 mx-2 ml-3' %></br>
             </div>
           <% end %>
         </div>
@@ -108,7 +108,7 @@
         <div class="modal-body text-center">
           <p class="mb-2 font-weight-bold h3 text-dark"><%= seatwork.quarter_seatwork.title.upcase %></p>
           <p class="text-danger h6">Are you sure you want to delete this record?<br>This process cannot be undone.</p><br>
-          <%= link_to 'Delete', student_delete_seatwork_path(id: @student.section_id, student_id: @student.id, seatwork_id: seatwork.id), class: 'btn btn-danger px-5', method: :delete %>
+          <%= link_to 'DELETE', student_delete_seatwork_path(id: @student.section_id, student_id: @student.id, seatwork_id: seatwork.id), class: 'btn btn-danger px-5', method: :delete %>
         </div>
         <div class="modal-footer">
         </div>
