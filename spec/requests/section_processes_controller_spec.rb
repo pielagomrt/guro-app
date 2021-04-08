@@ -31,6 +31,7 @@ RSpec.describe SectionProcessesController, type: :request do
     end
 
     it 'returns http success' do
+      follow_redirect!
       expect(response).to have_http_status(:success)
     end
 
@@ -52,8 +53,12 @@ RSpec.describe SectionProcessesController, type: :request do
       seatwork.reload
     end
 
-    it 'returns http success' do
-      expect(response).to have_http_status(:success)
+    it 'returns http status 302' do
+      expect(response.status).to eq 302
+    end
+
+    it 'redirects to path' do
+      expect(response).to redirect_to(view_section_seatworks_path(section))
     end
 
     it 'updates the seatwork title' do
@@ -74,8 +79,12 @@ RSpec.describe SectionProcessesController, type: :request do
       homework.reload
     end
 
-    it 'returns http success' do
-      expect(response).to have_http_status(:success)
+    it 'returns http status 302' do
+      expect(response.status).to eq 302
+    end
+
+    it 'redirects to path' do
+      expect(response).to redirect_to(view_section_homeworks_path(section))
     end
 
     it 'updates the homework title' do
@@ -96,8 +105,12 @@ RSpec.describe SectionProcessesController, type: :request do
       project.reload
     end
 
-    it 'returns http success' do
-      expect(response).to have_http_status(:success)
+    it 'returns http status 302' do
+      expect(response.status).to eq 302
+    end
+
+    it 'redirects to path' do
+      expect(response).to redirect_to(view_section_projects_path(section))
     end
 
     it 'updates the project title' do
@@ -118,8 +131,12 @@ RSpec.describe SectionProcessesController, type: :request do
       exam.reload
     end
 
-    it 'returns http success' do
-      expect(response).to have_http_status(:success)
+    it 'returns http status 302' do
+      expect(response.status).to eq 302
+    end
+
+    it 'redirects to path' do
+      expect(response).to redirect_to(view_section_exams_path(section))
     end
 
     it 'updates the exam title' do
@@ -140,8 +157,12 @@ RSpec.describe SectionProcessesController, type: :request do
       attendance.reload
     end
 
-    it 'returns http success' do
-      expect(response).to have_http_status(:success)
+    it 'returns http status 302' do
+      expect(response.status).to eq 302
+    end
+
+    it 'redirects to path' do
+      expect(response).to redirect_to(view_section_attendances_path(section))
     end
 
     it 'updates the attendance date' do
@@ -152,8 +173,12 @@ RSpec.describe SectionProcessesController, type: :request do
   describe 'DELETE /sections/:id/delete sections#destroy_section' do
     before { delete section_delete_path(section) }
 
-    it 'returns http success' do
-      expect(response).to have_http_status(:success)
+    it 'returns http status 302' do
+      expect(response.status).to eq 302
+    end
+
+    it 'redirects to path' do
+      expect(response).to redirect_to(dashboard_path)
     end
 
     it 'deletes the section' do
@@ -166,8 +191,12 @@ RSpec.describe SectionProcessesController, type: :request do
 
     before { delete section_seatwork_delete_path(id: section.id, seatwork_id: seatwork.id) }
 
-    it 'returns http success' do
-      expect(response).to have_http_status(:success)
+    it 'returns http status 302' do
+      expect(response.status).to eq 302
+    end
+
+    it 'redirects to path' do
+      expect(response).to redirect_to(view_section_seatworks_path(section))
     end
 
     it 'deletes the section' do
@@ -180,8 +209,12 @@ RSpec.describe SectionProcessesController, type: :request do
 
     before { delete section_homework_delete_path(id: section.id, homework_id: homework.id) }
 
-    it 'returns http success' do
-      expect(response).to have_http_status(:success)
+    it 'returns http status 302' do
+      expect(response.status).to eq 302
+    end
+
+    it 'redirects to path' do
+      expect(response).to redirect_to(view_section_homeworks_path(section))
     end
 
     it 'deletes the homework' do
@@ -194,8 +227,12 @@ RSpec.describe SectionProcessesController, type: :request do
 
     before { delete section_project_delete_path(id: section.id, project_id: project.id) }
 
-    it 'returns http success' do
-      expect(response).to have_http_status(:success)
+    it 'returns http status 302' do
+      expect(response.status).to eq 302
+    end
+
+    it 'redirects to path' do
+      expect(response).to redirect_to(view_section_projects_path(section))
     end
 
     it 'deletes the project' do
@@ -208,8 +245,12 @@ RSpec.describe SectionProcessesController, type: :request do
 
     before { delete section_exam_delete_path(id: section.id, exam_id: exam.id) }
 
-    it 'returns http success' do
-      expect(response).to have_http_status(:success)
+    it 'returns http status 302' do
+      expect(response.status).to eq 302
+    end
+
+    it 'redirects to path' do
+      expect(response).to redirect_to(view_section_exams_path(section))
     end
 
     it 'deletes the exam' do
@@ -222,8 +263,12 @@ RSpec.describe SectionProcessesController, type: :request do
 
     before { delete section_attendance_delete_path(id: section.id, attendance_id: attendance.id) }
 
-    it 'returns http success' do
-      expect(response).to have_http_status(:success)
+    it 'returns http status 302' do
+      expect(response.status).to eq 302
+    end
+
+    it 'redirects to path' do
+      expect(response).to redirect_to(view_section_attendances_path(section))
     end
 
     it 'deletes the attendance' do
