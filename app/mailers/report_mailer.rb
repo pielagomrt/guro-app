@@ -14,7 +14,7 @@ class ReportMailer < ApplicationMailer
     report = ::Reports::Student.new(params[:student])
     path_to_pdf = report.to_pdf_to_tmp
 
-    attachments["student_report_for#{report.student.first_name}_#{report.student.last_name}.pdf"] = File.read(path_to_pdf)
+    attachments["student_report_for_#{report.student.first_name}_#{report.student.last_name}.pdf"] = File.read(path_to_pdf)
 
     mail(to: report.student.email, subject: "Student Summary for #{report.student.last_name}, #{report.student.first_name}") do |format|
       format.html { render 'report_mailer/message' }

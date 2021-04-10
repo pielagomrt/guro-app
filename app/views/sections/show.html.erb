@@ -14,12 +14,12 @@
       <a class="btn btn-danger btn-circle text-center" href="#" data-toggle="modal" data-target="#deleteSectionModal_<%= @section.id %>">
         <i class="fas fa-trash"></i>
       </a>
-      <a href="#" class="btn btn-primary btn-icon-split ml-auto">
+      <%= link_to section_report_path(@section), method: 'post', class: 'btn btn-primary btn-icon-split ml-auto' do %>
         <span class="icon text-white-50">
           <i class="fas fa-download"></i>
         </span>
         <span class="text">Generate Report</span>
-      </a>
+      <% end %>
     </div>
     <div class="row d-flex justify-content-around">
       <div class="col-xl-6 col-md-6 mb-4">

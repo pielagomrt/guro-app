@@ -4,6 +4,11 @@ class ApplicationController < ActionController::Base
   rescue_from InvalidScoresError, with: :handle_invalid_scores_error
   before_action :update_allowed_parameters, if: :devise_controller?
 
+  def respond_success(message, path)
+    flash[:notice] = message
+    redirect_to(path)
+  end
+
   protected
 
   def update_allowed_parameters
