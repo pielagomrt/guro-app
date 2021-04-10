@@ -5,57 +5,62 @@ class StudentProcessesController < ApplicationController
 
   def update_student
     @student.update(params_student)
-    redirect_to students_path(@section)
+    respond_success('Successfully updated the student', students_path(@section))
   end
 
   def update_student_seatwork
     @student.seatworks.find(params[:seatwork_id]).update(params_score)
-    redirect_to view_student_seatworks_path(@section, @student)
+    respond_success('Successfully updated the seatwork', view_student_seatworks_path(@section, @student))
   end
 
   def update_student_homework
     @student.homeworks.find(params[:homework_id]).update(params_score)
-    redirect_to view_student_homeworks_path(@section, @student)
+    respond_success('Successfully updated the homework', view_student_homeworks_path(@section, @student))
   end
 
   def update_student_project
     @student.projects.find(params[:project_id]).update(params_score)
-    redirect_to view_student_projects_path(@section, @student)
+    respond_success('Successfully updated the project', view_student_projects_path(@section, @student))
   end
 
   def update_student_exam
     @student.exams.find(params[:exam_id]).update(params_score)
-    redirect_to view_student_exams_path(@section, @student)
+    respond_success('Successfully updated the exam', view_student_exams_path(@section, @student))
   end
 
   def destroy_student
     @student.destroy
-    redirect_to students_path(@section)
+    respond_success('Successfully deleted the student', students_path(@section))
   end
 
   def destroy_student_seatwork
     @student.seatworks.find(params[:seatwork_id]).destroy
-    redirect_to view_student_seatworks_path(@section, @student)
+    respond_success('Successfully deleted the seatwork', view_student_seatworks_path(@section, @student))
   end
 
   def destroy_student_homework
     @student.homeworks.find(params[:homework_id]).destroy
-    redirect_to view_student_homeworks_path(@section, @student)
+    respond_success('Successfully deleted the homework', view_student_homeworks_path(@section, @student))
   end
 
   def destroy_student_project
     @student.projects.find(params[:project_id]).destroy
-    redirect_to view_student_projects_path(@section, @student)
+    respond_success('Successfully deleted the project', view_student_projects_path(@section, @student))
   end
 
   def destroy_student_exam
     @student.exams.find(params[:exam_id]).destroy
-    redirect_to view_student_exams_path(@section, @student)
+    respond_success('Successfully deleted the exam', view_student_exams_path(@section, @student))
   end
 
   def destroy_student_attendance
     @student.absents.find(params[:absent_id]).destroy
-    redirect_to view_student_absences_path(@section, @student)
+    respond_success('Successfully deleted the absent', view_student_absences_path(@section, @student))
+  end
+
+  def student_report_to_email
+    ReportMailer.with(student: @student).student_summary.deliver_later
+    respond_success('Successfully sent the report to the student\'s email', student_path(@section, @student))
   end
 
   private

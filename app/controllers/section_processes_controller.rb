@@ -5,63 +5,67 @@ class SectionProcessesController < ApplicationController
 
   def update_section
     @section.update(params_section)
-    redirect_to section_path(@section)
+    respond_success('Successfully updated the section', section_path(@section))
   end
 
   def update_section_seatwork
     @active_quarter.seatworks.find(params[:seatwork_id]).update(params_quarter)
-    redirect_to view_section_seatworks_path(@section)
+    respond_success('Successfully updated the seatwork', view_section_seatworks_path(@section))
   end
 
   def update_section_homework
     @active_quarter.homeworks.find(params[:homework_id]).update(params_quarter)
-    redirect_to view_section_homeworks_path(@section)
+    respond_success('Successfully updated the homework', view_section_homeworks_path(@section))
   end
 
   def update_section_project
     @active_quarter.projects.find(params[:project_id]).update(params_quarter)
-    redirect_to view_section_projects_path(@section)
+    respond_success('Successfully updated the project', view_section_projects_path(@section))
   end
 
   def update_section_exam
     @active_quarter.exams.find(params[:exam_id]).update(params_quarter)
-    redirect_to view_section_exams_path(@section)
+    respond_success('Successfully updated the exam', view_section_exams_path(@section))
   end
 
   def update_section_attendance
     @active_quarter.attendances.find(params[:attendance_id]).update(params_quarter)
-    redirect_to view_section_attendances_path(@section)
+    respond_success('Successfully updated the attendance', view_section_attendances_path(@section))
+  end
+
+  def section_report_to_email
+    ReportMailer.with(section: @section, teacher: current_teacher).section_summary.deliver_later
+    respond_success('Successfully sent the report to your email', section_path(@section))
   end
 
   def destroy_section
     @section.destroy
-    redirect_to dashboard_path
-    flash[:notice] = "Section #{@section.name.upcase} has been deleted."
+    respond_success('Successfully deleted the section', dashboard_path)
   end
 
   def destroy_section_seatwork
     @active_quarter.seatworks.find(params[:seatwork_id]).destroy
-    redirect_to view_section_seatworks_path(@section)
+    respond_success('Successfully deleted the seatwork', view_section_seatworks_path(@section))
   end
 
   def destroy_section_homework
     @active_quarter.homeworks.find(params[:homework_id]).destroy
-    redirect_to view_section_homeworks_path(@section)
+    respond_success('Successfully deleted the homework', view_section_homeworks_path(@section))
   end
 
   def destroy_section_project
     @active_quarter.projects.find(params[:project_id]).destroy
-    redirect_to view_section_projects_path(@section)
+    respond_success('Successfully deleted the project', view_section_projects_path(@section))
   end
 
   def destroy_section_exam
     @active_quarter.exams.find(params[:exam_id]).destroy
-    redirect_to view_section_exams_path(@section)
+    respond_success('Successfully deleted the exam', view_section_exams_path(@section))
   end
 
   def destroy_section_attendance
     @active_quarter.attendances.find(params[:attendance_id]).destroy
-    redirect_to view_section_attendances_path(@section)
+    respond_success('Successfully deleted the attendance', view_section_attendances_path(@section))
   end
 
   private

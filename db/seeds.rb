@@ -2,8 +2,8 @@ require 'faker'
 
 num_of_teachers = 2
 num_of_sections = 2
-num_of_students = 5
-num_of_requirements_per_type = 2
+num_of_students = 40
+num_of_requirements_per_type = 5
 
 # GENERATE TEACHERS
 num_of_teachers.times do |teacher_num|

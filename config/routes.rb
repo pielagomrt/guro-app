@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get '/sections/:id/attendances', to: 'sections#view_attendances', as: 'view_section_attendances'
 
   # SECTION PROCESSES
+  post '/sections/:id/report', to: 'section_processes#section_report_to_email', as: 'section_report'
   put '/sections/:id/update', to: 'section_processes#update_section', as: 'section_update'
   put '/sections/:id/attendances/:attendance_id/update', to: 'section_processes#update_section_attendance', as: 'section_attendance_update'
   put '/sections/:id/seatworks/:seatwork_id/update', to: 'section_processes#update_section_seatwork', as: 'section_seatwork_update'
@@ -39,6 +40,7 @@ Rails.application.routes.draw do
   get '/sections/:id/students/:student_id/absences', to: 'students#view_absences', as: 'view_student_absences'
 
   # STUDENT PROCESSES
+  post '/sections/:id/students/:student_id/report', to: 'student_processes#student_report_to_email', as: 'student_report'
   put '/sections/:id/students/:student_id/update', to: 'student_processes#update_student', as: 'student_update'
   put '/sections/:id/students/:student_id/seatworks/:seatwork_id', to: 'student_processes#update_student_seatwork', as: 'student_update_seatwork'
   put '/sections/:id/students/:student_id/homeworks/:homework_id', to: 'student_processes#update_student_homework', as: 'student_update_homework'

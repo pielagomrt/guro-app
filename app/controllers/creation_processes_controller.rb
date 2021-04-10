@@ -131,11 +131,6 @@ class CreationProcessesController < ApplicationController
     params[:section_students]
   end
 
-  def respond_success(message, path)
-    flash[:notice] = message
-    redirect_to(path)
-  end
-
   def validate_scores(requirement)
     scores = students.values.pluck(:score)
     scores.all? { |score| score.to_i <= requirement.max_score }
