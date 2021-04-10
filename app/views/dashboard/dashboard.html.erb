@@ -1,17 +1,50 @@
-<h1>Hi Maam/Sir, you will see here the summary of your account and some educational videos related to your teaching subject that you can use or reference in your class</h1>
+<!-- <h1>Hi Maam/Sir, you will see here the summary of your account and some educational videos related to your teaching subject that you can use or reference in your class</h1> -->
+<div class="d-flex flex-wrap align-items-center justify-content-between">
+  <div><h1 class="mb-0 font-weight-bold text-primary">DASHBOARD</h1></div>
+  <div class="d-flex row">
+    <div>
+      <div class="d-flex align-items-center" style="position: relative;">
+        <span class="small">SUBJECT</span>
+        <div class="col-auto"><i class="fas fa-book" style="color: brown"></i></div>
+        <div style="width: 100px"></div>
+      </div>
+      <h4 class="text-dark"><%= current_teacher.subject.upcase %></h4>
+    </div>
+    <div>
+      <div class="d-flex align-items-center" style="position: relative;">
+        <span class="small">SECTION(S)</span>
+        <div class="col-auto"><i class="fas fa-chalkboard-teacher" style="color: green"></i></div>
+        <div style="width: 100px"></div>
+      </div>
+      <h4 class="text-dark"><%= current_teacher.sections.count %></h4>
+    </div>
+    <div>
+      <div class="d-flex align-items-center" style="position: relative;">
+        <span class="small">STUDENT(S)</span>
+        <div class="col-auto"><i class="fas fa-users" style="color: purple"></i></div>
+        <div style="width: 20px"></div>
+      </div>
+      <% if current_teacher %>
+        <h4 class="text-dark"><%= Student.count %></h4>
+      <% end %>
+    </div>
+  </div>
+</div><br>
 
 <div class="row">
     <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-primary shadow h-100 py-2">
+        <div class="card border-left-info shadow h-100 py-2">
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                            SUBJECT</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800"><%= current_teacher.subject.upcase %></div>
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                            NUMBER OF SEATWORK GIVEN</div>
+                        <% if current_teacher %>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><%= Quarter::Seatwork.count %></div>
+                        <% end %>
                     </div>
                     <div class="col-auto">
-                        <i class="fas fa-book fa-2x text-gray-300"></i>
+                        <i class="fas fa-book-reader fa-2x text-gray-300"></i>
                     </div>
                 </div>
             </div>
@@ -23,29 +56,31 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                            NUMBER OF SECTIONS</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800"><%= current_teacher.sections.count %></div>
+                            NUMBER OF HOMEWORK GIVEN</div>
+                        <% if current_teacher %>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><%= Quarter::Homework.count %></div>
+                        <% end %>
                     </div>
                     <div class="col-auto">
-                        <i class="fas fa-chalkboard-teacher fa-2x text-gray-300"></i>
+                        <i class="fas fa-home fa-2x text-gray-300"></i>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-info shadow h-100 py-2">
+        <div class="card border-left-primary shadow h-100 py-2">
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                            NUMBER OF STUDENTS</div>
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            NUMBER OF PROJECTS GIVEN</div>
                         <% if current_teacher %>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800"><%= Student.count %></div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><%= Quarter::Project.count %></div>
                         <% end %>
                     </div>
                     <div class="col-auto">
-                        <i class="fas fa-users fa-2x text-gray-300"></i>
+                        <i class="fas fa-project-diagram fa-2x text-gray-300"></i>
                     </div>
                 </div>
             </div>
@@ -57,11 +92,13 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                            ONE MORE HERE</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">ONE MORE HERE</div>
+                            NUMBER OF EXAMS GIVEN</div>
+                        <% if current_teacher %>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><%= Quarter::Exam.count %></div>
+                        <% end %>
                     </div>
                     <div class="col-auto">
-                        <i class="fas fa-laugh-beam fa-2x text-gray-300"></i>
+                        <i class="fas fa-file-signature fa-2x text-gray-300"></i>
                     </div>
                 </div>
             </div>
