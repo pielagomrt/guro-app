@@ -41,3 +41,7 @@ end
 
 gem "rails-controller-testing", "~> 1.0"
 gem "figaro"
+
+gem "wicked_pdf", "~> 2.1"
+
+gem "wkhtmltopdf-binary", "~> 0.12.6"
