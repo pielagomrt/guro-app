@@ -13,7 +13,7 @@
                             </div>
                             <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post, class: 'user' }) do |f| %>
                                 <div class="form-group field">
-                                    <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), class: 'form-control form-control-user', 'id': "exampleInputEmail", 'aria-describedby': "emailHelp", 'placeholder': "Email" %>
+                                    <%= f.email_field :email, autofocus: true, autocomplete: "off", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), class: 'form-control form-control-user', 'id': "exampleInputEmail", 'aria-describedby': "emailHelp", 'placeholder': "Email" %>
                                 </div>
                                 <div class="actions">
                                   <%= f.submit "Resend confirmation instructions", class: "btn btn-primary btn-user btn-block font-weight-bold" %>

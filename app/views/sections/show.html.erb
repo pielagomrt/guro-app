@@ -141,7 +141,7 @@
               </div>
               <div class="form-group">
                 <%= f.label :active_quarter, class: "text-uppercase small" %>
-                <%= f.number_field :active_quarter, required: true, class: "form-control m-auto text-center", 'style': "width: 50%" %>
+                <%= f.number_field :active_quarter, required: true, class: "form-control m-auto text-center", 'style': "width: 50%", 'min': '1', 'max': '4' %>
               </div>
             </div>
             <div class="text-center">
@@ -155,7 +155,7 @@
     </div>
   </div>
 
-<%# DELETE EXAM MODAL %>
+<%# DELETE SECTION MODAL %>
   <div class="modal fade" id="deleteSectionModal_<%= @section.id %>" tabindex="-1" role="dialog" aria-labelledby="section_delete_modal" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">

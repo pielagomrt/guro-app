@@ -22,19 +22,19 @@
                               <%= f.text_field :last_name, class: 'form-control form-control-user', 'id': 'exampleInputLastName', 'placeholder': 'Last Name', autofocus: true %>
                           </div>
                           <div class="form-group field">
-                              <%= f.email_field :email, class: 'form-control form-control-user', 'id': 'exampleInputEmail', 'placeholder': 'Email', autofocus: true, autocomplete: "email" %>
+                              <%= f.email_field :email, class: 'form-control form-control-user', 'id': 'exampleInputEmail', 'placeholder': 'Email', autofocus: true, autocomplete: "off" %>
                           </div>
                           <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
                             <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
                           <% end %>
                           <div class="form-group field">
-                                <%= f.password_field :password, class: 'form-control form-control-user', 'id': 'exampleInputPassword', 'placeholder': "New Password - #{@minimum_password_length} characters min (leave blank if you don't want to change it)", autocomplete: "new-password" %>
+                                <%= f.password_field :password, class: 'form-control form-control-user', 'id': 'exampleInputPassword', 'placeholder': "New Password - #{@minimum_password_length} characters min (leave blank if you don't want to change it)", autocomplete: "off" %>
                           </div>
                           <div class="form-group field">
-                                <%= f.password_field :password_confirmation, class: 'form-control form-control-user', 'id': 'exampleConfirmPassword', 'placeholder': 'Confirm New Password', autocomplete: "new-password" %>
+                                <%= f.password_field :password_confirmation, class: 'form-control form-control-user', 'id': 'exampleConfirmPassword', 'placeholder': 'Confirm New Password', autocomplete: "off" %>
                           </div>
                           <div class="form-group field">
-                                <%= f.password_field :current_password, class: 'form-control form-control-user', 'id': 'exampleConfirmPassword', 'placeholder': 'Current Password (we need your current password to confirm your changes)', autocomplete: "current-password" %>
+                                <%= f.password_field :current_password, class: 'form-control form-control-user', 'id': 'exampleConfirmPassword', 'placeholder': 'Current Password (we need your current password to confirm your changes)', autocomplete: "off" %>
                           </div>
                             <div class="actions">
                               <%= f.submit "UPDATE", class: 'btn btn-primary btn-user btn-block font-weight-bold' %>
