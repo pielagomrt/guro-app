@@ -19,6 +19,7 @@ jobs:
         env:
           HD_MAILTRAP_USERNAME: ${{secrets.MAILTRAP_USERNAME}}
           HD_MAILTRAP_PASSWORD: ${{secrets.MAILTRAP_PASSWORD}}
+          HD_GOOGLE_API_KEY: ${{secrets.GOOGLE_API_KEY}}
           HD_APP_URL: https://avion-guro-app.herokuapp.com/
           HD_DISABLE_DATABASE_ENVIRONMENT_CHECK: 1
           # DISABLE_DATABASE_ENVIRONMENT_CHECK allows heroku to reset production DB

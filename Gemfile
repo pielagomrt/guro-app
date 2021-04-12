@@ -45,3 +45,5 @@ gem "figaro"
 gem "wicked_pdf", "~> 2.1"
 
 gem "wkhtmltopdf-binary", "~> 0.12.6"
+
+gem "faraday", "~> 1.3"
