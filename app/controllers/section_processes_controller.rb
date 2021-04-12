@@ -38,6 +38,11 @@ class SectionProcessesController < ApplicationController
     respond_success('Successfully sent the report to your email', section_path(@section))
   end
 
+  def download_report
+    pdf = ::Reports::Section.new(@section).to_pdf
+    send_data(pdf, filename: "section_report_for_#{@section.name}.pdf", type: 'application/pdf')
+  end
+
   def destroy_section
     @section.destroy
     respond_success('Successfully deleted the section', dashboard_path)

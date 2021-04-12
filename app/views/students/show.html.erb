@@ -24,11 +24,18 @@
   </div>
   <div class="card-body">
     <div class="d-sm-flex align-items-center justify-content-end mb-4">
-      <%= link_to student_report_path(id: @section.id, student_id: @student.id), method: 'post', class: 'btn btn-primary btn-icon-split ml-auto' do %>
+      <%= link_to student_report_path(id: @section.id, student_id: @student.id), method: 'post', class: 'btn btn-primary btn-icon-split ml-2' do %>
+        <span class="icon text-white-50">
+          <i class="fas fa-paper-plane"></i>
+        </span>
+        <span class="text">Send Report to Student</span>
+      <% end %>
+
+      <%= link_to student_report_dowload_path(id: @section.id, student_id: @student.id), class: 'btn btn-primary btn-icon-split ml-2' do %>
         <span class="icon text-white-50">
           <i class="fas fa-download"></i>
         </span>
-        <span class="text">Generate Report</span>
+        <span class="text">Download Report</span>
       <% end %>
     </div>
     <div class="row d-flex justify-content-around">
