@@ -1,6 +1,6 @@
 <!-- <h1>Hi Maam/Sir, this is where you view the attendance of a section depending on current active_quarter</h1> -->
 
-<div class="card shadow mb-4 mesa-absent">
+<div class="card shadow mb-4 mesa">
   <div class="card-header py-3 table-responsive d-flex justify-content-around">
     <h5 class="m-0 text-muted mb-2">QUARTER : <span class="ml-3 px-3 text-light font-weight-bold bg-primary rounded"><%= @section.active_quarter %></h5>
     <h5 class="m-0 text-muted mb-2">SECTION : <span class="ml-3 px-3 text-light font-weight-bold bg-primary rounded"><%= @section.name.upcase %></h5>
@@ -20,6 +20,8 @@
         <thead style="background: #A2708A; color: white">
           <tr>
             <th scope="col">DATE OF ATTENDANCE</th>
+            <th scope="col">ABSENT</th>
+            <th scope="col">PRESENT</th>
             <th></th>
           </tr>
         </thead>
@@ -27,6 +29,8 @@
           <% @attendances.each do |attendance| %>
             <tr>
               <td><%= attendance.date.strftime("%d - %^B - %Y, %^A") %></td>
+              <td><%= @absences[attendance.id] %></td>
+              <td><%= @section.students.count - @absences[attendance.id] %></td>
               <td>
                 <div class="d-flex justify-content-around">
                   <a class="btn btn-warning btn-circle text-center" href="#" data-toggle="modal" data-target="#updateAttendanceModal_<%= attendance.id %>">
