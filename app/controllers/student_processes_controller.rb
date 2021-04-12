@@ -63,6 +63,11 @@ class StudentProcessesController < ApplicationController
     respond_success('Successfully sent the report to the student\'s email', student_path(@section, @student))
   end
 
+  def download_report
+    pdf = ::Reports::Student.new(@student).to_pdf
+    send_data(pdf, filename: "student_report_for_#{@studen.last_name}_#{@studen.first_name}.pdf", type: 'application/pdf')
+  end
+
   private
 
   def set_section
