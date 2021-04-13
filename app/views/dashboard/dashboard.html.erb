@@ -109,7 +109,7 @@
 <h5 class="mb-3 text-dark font-weight-bold">RECOMMENDED VIDEOS</h5>
 <div class="overflow-auto">
   <ul class="list-unstyled video-list-thumbs d-flex">
-    <% Youtube.search(current_teacher.subject).each do |video| %>
+    <% @youtube_videos.each do |video| %>
       <li class="col-lg-3 col-sm-4 col-xs-6">
         <a href="<%= video[:watch_url] %>" title="<%= video[:title] %>" target="_blank">
           <%= image_tag asset_path(video[:thumbnail]), class: "img-responsive", style: 'height: 100%; width: 100%' %>

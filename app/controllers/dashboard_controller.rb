@@ -5,5 +5,7 @@ class DashboardController < ApplicationController
     render layout: 'landing'
   end
 
-  def dashboard; end
+  def dashboard
+    @youtube_videos = Youtube.search(current_teacher.subject)
+  end
 end
