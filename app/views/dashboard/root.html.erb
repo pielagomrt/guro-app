@@ -7,7 +7,7 @@
     <nav id="navbar" class="navbar">
       <ul>
         <% if current_teacher %>
-          <li><a class="nav-link scrollto active" href="<%= dashboard_path %>">Dashboard</a></li>
+          <li></li>
           <li><%= link_to 'LOGOUT', destroy_teacher_session_path, class: 'getstarted scrollto', method: 'delete' %></li>
         <% else %>
           <li><a class="nav-link scrollto active" href="<%= root_path %>">HOME</a></li>
@@ -31,19 +31,22 @@
           <span class="text-primary font-weight-bold">All within one platform.</span>
         </h4>
         <div data-aos="fade-up" data-aos-delay="600">
+          <% if current_teacher %>
+          <p class="text-danger text-uppercase mb-0 font-weight-bold">You are logged in!</p>
           <div class="text-center text-lg-start d-flex justify-content-start">
-            <% if current_teacher %>
               <a href="<%= dashboard_path %>" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center p-4">
                 <span>GO TO DASHBOARD</span>
                 <i class="bi bi-arrow-right"></i>
               </a>
-            <% else %>
+          </div>
+          <% else %>
+            <div class="text-center text-lg-start d-flex justify-content-start">
               <a href="<%= new_teacher_registration_path %>" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center p-4">
                 <span>CREATE AN ACCOUNT</span>
                 <i class="bi bi-arrow-right"></i>
               </a>
-            <% end %>
-          </div>
+            </div>
+          <% end %>
         </div>
       </div>
       <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200">
