@@ -65,7 +65,7 @@ class StudentProcessesController < ApplicationController
 
   def download_report
     pdf = ::Reports::Student.new(@student).to_pdf
-    send_data(pdf, filename: "student_report_for_#{@studen.last_name}_#{@studen.first_name}.pdf", type: 'application/pdf')
+    send_data(pdf, filename: "student_report_for_#{@student.last_name}_#{@student.first_name}.pdf", type: 'application/pdf')
   end
 
   private
