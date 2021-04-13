@@ -26,7 +26,9 @@ class SectionsController < ApplicationController
   end
 
   def view_attendances
+    @absences = {}
     @attendances = @active_quarter.attendances
+    @attendances.each { |attendance| @absences[attendance.id] = attendance.student_absents.length }
   end
 
   private

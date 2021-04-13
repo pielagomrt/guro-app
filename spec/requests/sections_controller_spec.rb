@@ -130,5 +130,11 @@ RSpec.describe SectionsController, type: :request do
     it 'has @attendances instance variable' do
       expect(assigns(:attendances)).to eq(current_quarter.attendances)
     end
+
+    it 'has @absences instance variable' do
+      absences = {}
+      current_quarter.attendances.each { |attendance| absences[attendance.id] = attendance.student_absents.length }
+      expect(assigns(:absences)).to eq(absences)
+    end
   end
 end
