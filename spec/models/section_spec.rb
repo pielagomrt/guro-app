@@ -30,21 +30,27 @@ RSpec.describe Section, type: :model do
     end
   end
 
-  context 'when saving without active quarter' do
+  context 'when saving active quarter beyond inclusion validation' do
     before do
-      section.active_quarter = nil
+      section.active_quarter = 0
       section.save
     end
 
-    it '4. should not save without active quarter' do
+    it '1. should not save a value more than 4' do
+      section.active_quarter = 5
+      section.save
       expect(section).not_to be_valid
     end
 
-    it '5. should only have one error' do
+    it '2. should not save a value less than 1' do
+      expect(section).not_to be_valid
+    end
+
+    it '3. should only have one error' do
       expect(section.errors.full_messages.length).to eq(1)
     end
 
-    it '6. should only have an error for active quarter' do
+    it '4. should only have an error for active quarter' do
       expect(section.errors.to_h.keys).to include(:active_quarter)
     end
   end
