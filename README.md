@@ -1,4 +1,4 @@
-![logo](app/assets/images/logo_name.png =250x)
+<img src="app/assets/images/logo_name.png" width="250px">
 
 ## Description
 
