@@ -2,7 +2,7 @@
 
 ## Description
 
-An app specifically designed for teachers. It has a with a simple and intuitive interface that would provide a more effective method in organizing student records since the pandemic has recalibrated how teachers divide their time between teaching and administrative tasks.
+An app specifically designed for teachers. It has a simple and intuitive interface that would provide a more effective method in organizing student records since the pandemic has recalibrated how teachers divide their time between teaching and administrative tasks.
 
 ## Features
 - create password-protected accounts
