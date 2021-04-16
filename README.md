@@ -1,4 +1,4 @@
-![logo](app/assets/images/logo_name.png)
+![logo](app/assets/images/logo_name.png =250x)
 
 ## Description
 
