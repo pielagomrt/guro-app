@@ -27,6 +27,9 @@ An app specifically designed for teachers. It has a simple and intuitive interfa
     MAILTRAP_PASSWORD: "value"
     GOOGLE_API_KEY: "value"
   ```
+  [How to get Mailtrap Username & Password](https://medium.com/@christianjombo/setting-up-mailtrap-for-laravel-development-313133bb800c#:~:text=You%20can%20get%20your%20Mailtrap,is%20beside%20your%20Mailtrap%20inbox.)
+  </br>[How to get Google API Key w/ Youtube Data API access](https://developers.google.com/youtube/v3/getting-started)
+
 - Start the application
   ```
     $ rails s
