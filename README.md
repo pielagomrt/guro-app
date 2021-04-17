@@ -16,7 +16,7 @@ An app specifically designed for teachers. It has a simple and intuitive interfa
 - get video recommendations (through YouTube API) based on subject expertise
 
 ## Setup Locally
-- Setup the dependencies and table
+- Setup the dependencies and database
   ```
     $ bundle install
     $ rails db:setup
