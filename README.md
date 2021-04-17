@@ -6,7 +6,7 @@ An app specifically designed for teachers. It has a simple and intuitive interfa
 
 ## Features
 - create password-protected accounts
-- import student roster and easily access individual records
+- create student roster and easily access individual records
 - track student absences
 - track student performance and overall class progress
   - automatic calculation of test scores (seatwork, homework, exams, projects)
