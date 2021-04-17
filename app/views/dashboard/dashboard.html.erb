@@ -24,7 +24,7 @@
         <div class="col-auto"><i class="fas fa-users" style="color: purple"></i></div>
         <div style="width: 20px"></div>
       </div>
-            <h4 class="text-dark"><%= @student_count.sum %></h4>
+      <h4 class="text-dark"><%= @student_count.sum %></h4>
     </div>
   </div>
 </div><br>
@@ -35,9 +35,9 @@
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                        NUMBER OF SEATWORK GIVEN</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800"><%= @seatworks.sum %></div>
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                            NUMBER OF SEATWORK GIVEN</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800"><%= @seatworks.sum %></div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-book-reader fa-2x text-gray-300"></i>
@@ -53,9 +53,7 @@
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                             NUMBER OF HOMEWORK GIVEN</div>
-                        <% if current_teacher %>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800"><%= @homeworks.sum %></div>
-                        <% end %>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800"><%= @homeworks.sum %></div>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-home fa-2x text-gray-300"></i>
@@ -71,9 +69,7 @@
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                             NUMBER OF PROJECTS GIVEN</div>
-                        <% if current_teacher %>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800"><%= @projects.sum %></div>
-                        <% end %>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800"><%= @projects.sum %></div>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-project-diagram fa-2x text-gray-300"></i>
@@ -89,9 +85,7 @@
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                             NUMBER OF EXAMS GIVEN</div>
-                        <% if current_teacher %>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800"><%= @exams.sum %></div>
-                        <% end %>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800"><%= @exams.sum %></div>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-file-signature fa-2x text-gray-300"></i>
